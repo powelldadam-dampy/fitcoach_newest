@@ -91,7 +91,6 @@ textarea{resize:none;min-height:80px;}
 .exd.ck{background:var(--acc);border-color:var(--acc);}
 .exd.ck svg{stroke:#0a0a0f;}
 .exd svg{width:12px;height:12px;stroke:var(--txt3);fill:none;stroke-width:2.5;}
-/* DEMO BTN */
 .dbtn{background:var(--sur2);border:.5px solid var(--sur3);border-radius:50px;padding:3px 9px;font-size:11px;font-weight:500;color:var(--acc2);cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap;display:inline-block;margin-left:6px;flex-shrink:0;}
 .dbtn:active{opacity:.7;}
 /* LOG */
@@ -147,15 +146,10 @@ textarea{resize:none;min-height:80px;}
 .prl{font-size:14px;font-weight:500;}
 .prls{font-size:12px;color:var(--txt2);margin-top:2px;}
 .prv{font-size:13px;color:var(--acc2);}
-.usw{display:flex;gap:10px;padding:0 16px;margin-bottom:16px;}
-.usb{flex:1;padding:12px;border-radius:var(--rs);background:var(--sur2);border:.5px solid var(--sur3);cursor:pointer;text-align:center;transition:all .15s;color:var(--txt2);font-size:13px;font-family:'DM Sans',sans-serif;-webkit-tap-highlight-color:transparent;}
-.usb.on{border-color:var(--acc);color:var(--acc);background:rgba(200,240,76,.08);}
-.usbn{font-weight:500;font-size:14px;}
 .es{text-align:center;padding:60px 30px;}
 .ei{font-size:48px;margin-bottom:12px;opacity:.3;}
 .et{font-size:17px;font-weight:500;margin-bottom:6px;}
 .em{font-size:13px;color:var(--txt2);line-height:1.5;}
-/* MODAL */
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:flex-end;}
 .mo.on{display:flex;}
 .ms{background:var(--sur);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + var(--sb));width:100%;max-height:92dvh;overflow-y:auto;}
@@ -178,18 +172,24 @@ textarea{resize:none;min-height:80px;}
 
 <!-- ONBOARDING -->
 <div id="obs" style="position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;">
-  <div class="ob-pips"><div class="pip on"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
+  <div class="ob-pips"><div class="pip on"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div></div>
+
   <div class="obs on" id="ob0">
-    <div class="ob-hero"><h1>Train smarter,<br><em>together.</em></h1><p>Smart programmes, progressive overload, and live exercise demos — completely free.</p></div>
-    <div style="padding:0 20px;"><div class="card" style="margin-bottom:12px;"><div class="il" style="margin-bottom:14px;">Who's training?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="ig" style="margin:0;"><div class="il">Your name</div><input id="u1n" placeholder="Dampy"></div>
-        <div class="ig" style="margin:0;"><div class="il">Partner</div><input id="u2n" placeholder="Fredo"></div>
-      </div></div></div>
-    <div class="ob-nav"><button class="btn btn-p" onclick="obn()">Get started →</button></div>
+    <div class="ob-hero"><h1>Your personal<br><em>training app.</em></h1><p>Smart programmes, progressive overload tracking, and exercise demos — completely free.</p></div>
+    <div style="padding:0 20px;">
+      <div class="card">
+        <div class="il" style="margin-bottom:14px;">What's your name?</div>
+        <input id="u1n" placeholder="Fredo">
+      </div>
+    </div>
+    <div class="ob-nav"><button class="btn btn-p btn-f" onclick="obn()">Get started →</button></div>
   </div>
+
   <div class="obs" id="ob1">
-    <div style="padding:20px 20px 14px;"><div id="ob1tag" style="font-size:12px;font-weight:600;color:var(--acc);letter-spacing:.06em;margin-bottom:4px;"></div><h2 class="obt">Your fitness goals</h2><p class="obs-sub">Select all that apply.</p></div>
+    <div style="padding:20px 20px 14px;">
+      <div id="ob1tag" style="font-size:12px;font-weight:600;color:var(--acc);letter-spacing:.06em;margin-bottom:4px;"></div>
+      <h2 class="obt">Your fitness goals</h2><p class="obs-sub">Select all that apply.</p>
+    </div>
     <div style="padding:0 20px;">
       <div class="chips" id="g1c">
         <div class="chip" data-v="Build muscle" onclick="tc(this,'g1')">Build muscle</div>
@@ -208,8 +208,12 @@ textarea{resize:none;min-height:80px;}
     </div>
     <div class="ob-nav"><button class="btn btn-g btn-s" onclick="obb()">Back</button><button class="btn btn-p" onclick="obn()">Continue →</button></div>
   </div>
+
   <div class="obs" id="ob2">
-    <div style="padding:20px 20px 14px;"><div id="ob2tag" style="font-size:12px;font-weight:600;color:var(--acc);letter-spacing:.06em;margin-bottom:4px;"></div><h2 class="obt">Equipment &amp; schedule</h2><p class="obs-sub">What do you have access to?</p></div>
+    <div style="padding:20px 20px 14px;">
+      <div id="ob2tag" style="font-size:12px;font-weight:600;color:var(--acc);letter-spacing:.06em;margin-bottom:4px;"></div>
+      <h2 class="obt">Equipment &amp; schedule</h2><p class="obs-sub">What do you have access to?</p>
+    </div>
     <div style="padding:0 20px;">
       <div class="chips" id="eq1c">
         <div class="chip" data-v="Full gym" onclick="tc(this,'eq1')">Full gym</div>
@@ -228,29 +232,9 @@ textarea{resize:none;min-height:80px;}
     </div>
     <div class="ob-nav"><button class="btn btn-g btn-s" onclick="obb()">Back</button><button class="btn btn-p" onclick="obn()">Continue →</button></div>
   </div>
+
   <div class="obs" id="ob3">
-    <div style="padding:20px 20px 14px;"><div id="ob3tag" style="font-size:12px;font-weight:600;color:var(--acc2);letter-spacing:.06em;margin-bottom:4px;"></div><h2 class="obt">Partner profile</h2><p class="obs-sub">Set up their goals and details.</p></div>
-    <div style="padding:0 20px;">
-      <div class="chips" id="g2c">
-        <div class="chip" data-v="Build muscle" onclick="tc(this,'g2')">Build muscle</div>
-        <div class="chip" data-v="Lose fat" onclick="tc(this,'g2')">Lose fat</div>
-        <div class="chip" data-v="Improve endurance" onclick="tc(this,'g2')">Improve endurance</div>
-        <div class="chip" data-v="Increase strength" onclick="tc(this,'g2')">Increase strength</div>
-        <div class="chip" data-v="Improve flexibility" onclick="tc(this,'g2')">Improve flexibility</div>
-        <div class="chip" data-v="General fitness" onclick="tc(this,'g2')">General fitness</div>
-        <div class="chip" data-v="Sport performance" onclick="tc(this,'g2')">Sport performance</div>
-        <div class="chip" data-v="Rehab / recovery" onclick="tc(this,'g2')">Rehab / recovery</div>
-      </div>
-      <div style="margin-top:18px;">
-        <div class="ig"><div class="il">Fitness level</div><select id="l2"><option value="">Select…</option><option>Beginner (0–6 months)</option><option>Intermediate (6 months – 2 years)</option><option>Advanced (2+ years)</option></select></div>
-        <div class="ig"><div class="il">Injuries or limitations?</div><textarea id="inj2" placeholder="e.g. Shoulder impingement…"></textarea></div>
-        <div class="ig"><div class="il">Training days per week</div><select id="d2"><option value="">Select…</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
-      </div>
-    </div>
-    <div class="ob-nav"><button class="btn btn-g btn-s" onclick="obb()">Back</button><button class="btn btn-p" onclick="obn()">Continue →</button></div>
-  </div>
-  <div class="obs" id="ob4">
-    <div class="ob-hero" style="padding-top:80px;"><div style="font-size:56px;margin-bottom:16px;">🎯</div><h1>All set.</h1><p>Your programme is ready. Tap any exercise name to watch a demo. Free forever.</p></div>
+    <div class="ob-hero" style="padding-top:80px;"><div style="font-size:56px;margin-bottom:16px;">🎯</div><h1>All set.</h1><p>Your programme is ready. Tap any exercise to watch a demo. Free forever.</p></div>
     <div style="padding:0 20px 20px;"><div class="card" id="obsumm"></div></div>
     <div class="ob-nav"><button class="btn btn-p btn-f" onclick="finishOb()">Start training →</button></div>
   </div>
@@ -275,6 +259,7 @@ textarea{resize:none;min-height:80px;}
     <div class="sh"><span class="sttl">Recent sessions</span><span class="sl" onclick="showTab('history')">See all</span></div>
     <div id="hrec" style="padding:0 16px;"></div>
   </div>
+
   <div id="tab-log" class="sc">
     <div class="ph" style="padding-bottom:8px;"><h1 class="pt">Log workout</h1><p class="ps2" id="logsub">New session</p></div>
     <div class="tb">
@@ -292,28 +277,19 @@ textarea{resize:none;min-height:80px;}
     </div>
     <div class="wl" id="loglist"></div>
   </div>
+
   <div id="tab-history" class="sc">
-    <div class="ph"><h1 class="pt">History</h1></div>
-    <div class="usw">
-      <button class="usb on" id="hsu1" onclick="swHU(0)"><div class="usbn" id="hsn1">You</div><div style="font-size:11px;margin-top:2px;">Your sessions</div></button>
-      <button class="usb" id="hsu2" onclick="swHU(1)"><div class="usbn" id="hsn2">Partner</div><div style="font-size:11px;margin-top:2px;">Their sessions</div></button>
-    </div>
+    <div class="ph"><h1 class="pt">History</h1><p class="ps2" id="hist-sub"></p></div>
     <div style="padding:0 16px;" id="histlist"></div>
   </div>
+
   <div id="tab-plans" class="sc">
-    <div class="ph"><h1 class="pt">Programmes</h1><p class="ps2">Tap an exercise name in any plan to watch a demo</p></div>
-    <div class="usw">
-      <button class="usb on" id="plu1" onclick="swPU(0)"><div class="usbn" id="pln1">You</div></button>
-      <button class="usb" id="plu2" onclick="swPU(1)"><div class="usbn" id="pln2">Partner</div></button>
-    </div>
+    <div class="ph"><h1 class="pt">Programmes</h1><p class="ps2">Tap any exercise name to watch a demo</p></div>
     <div id="planslist"></div>
   </div>
+
   <div id="tab-profile" class="sc">
     <div class="pph"><div class="ppa" id="ppav"></div><div class="ppn" id="ppnm"></div><div style="font-size:13px;color:var(--txt2);margin-top:4px;" id="pplv"></div></div>
-    <div class="usw">
-      <button class="usb on" id="pfu1" onclick="swPrU(0)"><div class="usbn" id="pfn1">You</div></button>
-      <button class="usb" id="pfu2" onclick="swPrU(1)"><div class="usbn" id="pfn2">Partner</div></button>
-    </div>
     <div class="pps">
       <div class="psi"><div class="psv" id="ppwo">0</div><div class="psl">Workouts</div></div>
       <div class="psi"><div class="psv" id="ppst">0</div><div class="psl">Streak</div></div>
@@ -330,7 +306,7 @@ textarea{resize:none;min-height:80px;}
     <div class="psec">
       <div class="sttl" style="margin-bottom:12px;">Settings</div>
       <div class="pr" style="cursor:pointer;" onclick="if(confirm('Clear all data and restart?')){localStorage.clear();location.reload();}">
-        <div><div class="prl" style="color:var(--red)">Reset all data</div><div class="prls">Clear profiles and history</div></div>
+        <div><div class="prl" style="color:var(--red)">Reset all data</div><div class="prls">Clear profile and history</div></div>
         <span style="color:var(--txt3)">›</span>
       </div>
     </div>
@@ -381,563 +357,177 @@ textarea{resize:none;min-height:80px;}
   </div>
 </div>
 
-<!-- Exercise Demo Modal -->
 <div class="mo" id="mdemo" onclick="closeM('mdemo')">
   <div class="ms" onclick="event.stopPropagation()">
     <div class="mh"></div>
-    <div id="demo-offline" style="display:none;background:rgba(255,184,76,.08);border:.5px solid rgba(255,184,76,.2);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:#ffb84c;margin-bottom:12px;">
-      ⚡ Connect to the internet to load exercise demos.
-    </div>
-    <div class="dgw" id="dgw"><div class="dgl">Loading demo…</div></div>
+    <div class="dgw" id="dgw"><div class="dgl">Loading…</div></div>
     <div id="demo-title" style="font-size:18px;font-weight:500;margin-bottom:8px;"></div>
     <div id="demo-muscles" style="margin-bottom:14px;"></div>
     <div id="demo-steps"></div>
     <div id="demo-nf" style="display:none;text-align:center;padding:20px 0;">
       <div style="font-size:32px;margin-bottom:8px;">🔍</div>
-      <div style="font-size:14px;color:var(--txt2);line-height:1.5;">No demo found for this exercise.<br>Try searching YouTube for form guides.</div>
+      <div style="font-size:14px;color:var(--txt2);line-height:1.5;margin-bottom:16px;">No guide found for this exercise.</div>
+      <a id="demo-yt" href="#" target="_blank" class="btn btn-g btn-f" style="text-decoration:none;">▶ Watch on YouTube</a>
     </div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════
+// ══════════════════════════════
 //  STATE
-// ══════════════════════════════════
+// ══════════════════════════════
 let S={
-  done:false,cu:0,hu:0,pu:0,pru:0,
-  users:[
-    {name:'',goals:[],level:'',injuries:'',equipment:[],days:'',duration:'',plan:null},
-    {name:'',goals:[],level:'',injuries:'',equipment:[],days:'',duration:'',plan:null}
-  ],
+  done:false,
+  user:{name:'',goals:[],level:'',injuries:'',equipment:[],days:'',duration:'',plan:null},
   workouts:[],session:[]
 };
-const save=()=>localStorage.setItem('fc5',JSON.stringify(S));
-const load=()=>{const d=localStorage.getItem('fc5');if(d)try{S=Object.assign({},S,JSON.parse(d));}catch(e){}};
+const save=()=>localStorage.setItem('fc6',JSON.stringify(S));
+const load=()=>{const d=localStorage.getItem('fc6');if(d)try{S=Object.assign({},S,JSON.parse(d));}catch(e){}};
 
-// ══════════════════════════════════
-//  EXERCISE LIBRARY (offline, no API needed)
-// ══════════════════════════════════
-const EX = {
-  'Bench Press': {
-    muscles: ['Chest','Anterior Deltoids','Triceps'],
-    secondary: ['Serratus Anterior'],
-    steps: [
-      'Lie flat on the bench with feet planted on the floor.',
-      'Grip the bar just wider than shoulder-width, wrists straight.',
-      'Unrack the bar and hold it directly above your chest.',
-      'Lower the bar to your mid-chest with control, elbows at ~45°.',
-      'Press back up powerfully to the start position.',
-      'Keep your upper back tight and a slight arch in your lower back throughout.'
-    ],
-    tip: '💡 Squeeze the bar like you\'re trying to bend it inward to engage chest more.'
-  },
-  'Squat': {
-    muscles: ['Quads','Glutes','Hamstrings'],
-    secondary: ['Core','Lower Back','Calves'],
-    steps: [
-      'Set the bar across your upper traps, feet shoulder-width apart.',
-      'Brace your core and take a deep breath in.',
-      'Push your knees out and descend until thighs are parallel or below.',
-      'Drive through your heels and mid-foot to stand back up.',
-      'Keep your chest tall and spine neutral throughout.'
-    ],
-    tip: '💡 Think "push the floor away" rather than "pull yourself up".'
-  },
-  'Deadlift': {
-    muscles: ['Hamstrings','Glutes','Lower Back'],
-    secondary: ['Traps','Forearms','Core','Quads'],
-    steps: [
-      'Stand with feet hip-width, bar over mid-foot.',
-      'Hinge at the hips and grip the bar just outside your legs.',
-      'Take a deep breath, brace your core, and pull your chest tall.',
-      'Push the floor away as you drag the bar up your shins.',
-      'Lock out at the top by squeezing glutes — don\'t hyperextend.',
-      'Lower the bar with control by hinging at the hips first.'
-    ],
-    tip: '💡 Imagine you\'re trying to push the floor apart with your feet as you lift.'
-  },
-  'Barbell Row': {
-    muscles: ['Lats','Rhomboids','Rear Deltoids'],
-    secondary: ['Biceps','Lower Back','Traps'],
-    steps: [
-      'Hinge forward until torso is roughly 45°, bar hanging at arms length.',
-      'Pull the bar to your lower chest, leading with your elbows.',
-      'Squeeze your shoulder blades together at the top.',
-      'Lower the bar with control back to the start.',
-      'Keep your lower back flat — don\'t round.'
-    ],
-    tip: '💡 Think "elbows to back pockets" to feel it more in your lats.'
-  },
-  'Overhead Press': {
-    muscles: ['Anterior Deltoids','Lateral Deltoids','Triceps'],
-    secondary: ['Upper Chest','Traps','Core'],
-    steps: [
-      'Hold the bar at shoulder height, just outside shoulder-width.',
-      'Brace your core and glutes — keep your body rigid.',
-      'Press the bar straight up, moving your head back slightly to clear it.',
-      'At the top, shrug your traps up to protect your shoulders.',
-      'Lower with control back to the start position.'
-    ],
-    tip: '💡 Squeeze your glutes hard — it protects your lower back during the press.'
-  },
-  'Romanian Deadlift': {
-    muscles: ['Hamstrings','Glutes'],
-    secondary: ['Lower Back','Calves'],
-    steps: [
-      'Stand with feet hip-width, holding the bar at hip height.',
-      'Push your hips back while keeping your back flat.',
-      'Lower the bar down your thighs until you feel a strong hamstring stretch.',
-      'Drive your hips forward to return to standing.',
-      'Keep a slight bend in your knees throughout.'
-    ],
-    tip: '💡 Focus on feeling the stretch in your hamstrings — don\'t just lower the weight.'
-  },
-  'Pull-up': {
-    muscles: ['Lats','Biceps','Rear Deltoids'],
-    secondary: ['Rhomboids','Core','Forearms'],
-    steps: [
-      'Hang from the bar with an overhand grip, wider than shoulder-width.',
-      'Depress your shoulder blades (pull them down) before pulling.',
-      'Pull your chest towards the bar, driving elbows down and back.',
-      'Pause briefly at the top, chin above the bar.',
-      'Lower with full control to a dead hang.'
-    ],
-    tip: '💡 Think "elbows to hips" — this activates your lats far more than just pulling up.'
-  },
-  'Chin-up': {
-    muscles: ['Biceps','Lats'],
-    secondary: ['Rear Deltoids','Core','Forearms'],
-    steps: [
-      'Hang from the bar with an underhand grip at shoulder-width.',
-      'Pull your chest up towards the bar, leading with your elbows.',
-      'Keep your body still — avoid swinging.',
-      'Lower slowly with full control to a dead hang.'
-    ],
-    tip: '💡 Supinated grip means more bicep — great for arm size as well as back width.'
-  },
-  'Lat Pulldown': {
-    muscles: ['Lats','Rear Deltoids','Biceps'],
-    secondary: ['Rhomboids','Teres Major'],
-    steps: [
-      'Grip the bar wider than shoulder-width, palms facing away.',
-      'Lean back slightly and pull the bar to your upper chest.',
-      'Lead with your elbows — drive them down and back.',
-      'Squeeze your lats at the bottom, hold briefly.',
-      'Return the bar up slowly with control.'
-    ],
-    tip: '💡 Imagine you\'re trying to put the bar in your back pockets.'
-  },
-  'Incline Dumbbell Press': {
-    muscles: ['Upper Chest','Anterior Deltoids','Triceps'],
-    secondary: ['Serratus Anterior'],
-    steps: [
-      'Set the bench to 30–45°. Hold dumbbells at shoulder level, palms forward.',
-      'Press both dumbbells up and slightly inward until arms are extended.',
-      'Lower with control, keeping elbows at about 45° from your body.',
-      'Feel the stretch at the bottom before pressing again.'
-    ],
-    tip: '💡 30° hits upper chest better than 45° — most people go too steep.'
-  },
-  'Dumbbell Curl': {
-    muscles: ['Biceps','Brachialis'],
-    secondary: ['Forearms'],
-    steps: [
-      'Stand holding dumbbells at your sides, palms facing forward.',
-      'Curl both dumbbells up towards your shoulders, keeping elbows fixed.',
-      'Squeeze hard at the top.',
-      'Lower slowly — take 3 seconds on the way down.'
-    ],
-    tip: '💡 The slow lowering (eccentric) phase builds more muscle than the curl up.'
-  },
-  'Tricep Pushdown': {
-    muscles: ['Triceps'],
-    secondary: ['Forearms'],
-    steps: [
-      'Set a cable machine to high, attach a straight bar or rope.',
-      'Grip with elbows tucked at your sides.',
-      'Push the bar down until arms are fully extended.',
-      'Squeeze your triceps hard at the bottom.',
-      'Return slowly, letting elbows bend to ~90° at the top.'
-    ],
-    tip: '💡 Keep elbows pinned to your sides throughout — don\'t let them flare.'
-  },
-  'Face Pull': {
-    muscles: ['Rear Deltoids','Rotator Cuff','Rhomboids'],
-    secondary: ['Traps','Biceps'],
-    steps: [
-      'Set a cable to face height, use a rope attachment.',
-      'Pull the rope towards your face, hands moving to either side of your head.',
-      'Keep elbows high and flared out throughout.',
-      'Squeeze your rear delts and hold for a second.',
-      'Return slowly to the start.'
-    ],
-    tip: '💡 Face pulls are one of the best shoulder health exercises — don\'t skip them.'
-  },
-  'Hip Thrust': {
-    muscles: ['Glutes','Hamstrings'],
-    secondary: ['Core','Quads'],
-    steps: [
-      'Sit with your upper back against a bench, bar across your hips.',
-      'Plant feet flat, hip-width apart.',
-      'Drive your hips up by squeezing your glutes hard.',
-      'At the top, your torso should be parallel to the floor.',
-      'Lower with control and repeat.'
-    ],
-    tip: '💡 Tuck your chin slightly and focus on a posterior pelvic tilt at the top for max glute activation.'
-  },
-  'Leg Press': {
-    muscles: ['Quads','Glutes','Hamstrings'],
-    secondary: ['Calves'],
-    steps: [
-      'Sit in the machine with feet hip-width on the platform.',
-      'Release the safety and lower the platform by bending your knees.',
-      'Go as deep as you comfortably can without your lower back rounding.',
-      'Push through your full foot to extend your legs.',
-      'Do not lock out your knees at the top.'
-    ],
-    tip: '💡 Foot placement matters: high feet = more glutes/hamstrings, low feet = more quads.'
-  },
-  'Cable Fly': {
-    muscles: ['Chest','Anterior Deltoids'],
-    secondary: ['Biceps'],
-    steps: [
-      'Set cables at chest height, stand in the centre with one foot forward.',
-      'Hold handles with a slight bend in your elbows.',
-      'Bring your hands together in an arc in front of your chest.',
-      'Squeeze your chest hard when hands meet.',
-      'Return slowly, feeling the chest stretch.'
-    ],
-    tip: '💡 Keep the same elbow bend throughout — don\'t let them bend more as you press.'
-  },
-  'Bulgarian Split Squat': {
-    muscles: ['Quads','Glutes'],
-    secondary: ['Hamstrings','Core','Calves'],
-    steps: [
-      'Stand a metre in front of a bench, place one foot on it behind you.',
-      'Lower your back knee towards the floor.',
-      'Keep your front shin as vertical as possible.',
-      'Drive through your front heel to return to the start.',
-      'Complete all reps on one leg before switching.'
-    ],
-    tip: '💡 Most people stand too close to the bench — give yourself more room forward.'
-  },
-  'Seated Cable Row': {
-    muscles: ['Lats','Rhomboids','Rear Deltoids'],
-    secondary: ['Biceps','Lower Back'],
-    steps: [
-      'Sit with feet on the foot rests, knees slightly bent.',
-      'Pull the handle to your lower sternum, keeping elbows close to your body.',
-      'Squeeze your shoulder blades together at the end.',
-      'Extend your arms slowly back to the start — feel the stretch.'
-    ],
-    tip: '💡 Avoid rocking back — the drive should come from your arms and back, not your torso.'
-  },
-  'Dumbbell Shoulder Press': {
-    muscles: ['Anterior Deltoids','Lateral Deltoids','Triceps'],
-    secondary: ['Upper Traps','Core'],
-    steps: [
-      'Sit on a bench with back support, hold dumbbells at shoulder height.',
-      'Press both dumbbells up and slightly inward.',
-      'Don\'t let them clang together at the top.',
-      'Lower back to shoulder height with control.'
-    ],
-    tip: '💡 A slight forward lean of the torso can help if you have shoulder mobility issues.'
-  },
-  'Calf Raise': {
-    muscles: ['Gastrocnemius','Soleus'],
-    secondary: [],
-    steps: [
-      'Stand with the balls of your feet on a raised surface.',
-      'Lower your heels as far as comfortable to stretch the calves.',
-      'Rise up on your toes as high as possible.',
-      'Pause and squeeze at the top.',
-      'Lower slowly — 3 seconds down.'
-    ],
-    tip: '💡 Calves respond best to both heavy weight and high reps — train them both ways.'
-  },
-  'Push-up': {
-    muscles: ['Chest','Anterior Deltoids','Triceps'],
-    secondary: ['Core','Serratus Anterior'],
-    steps: [
-      'Place hands just wider than shoulder-width, body in a straight line.',
-      'Lower your chest to just above the floor, elbows at ~45°.',
-      'Press back up powerfully.',
-      'Keep your core braced — don\'t let your hips sag.'
-    ],
-    tip: '💡 To increase difficulty: elevate feet. To make easier: elevate hands on a bench.'
-  },
-  'Pike Push-up': {
-    muscles: ['Anterior Deltoids','Triceps'],
-    secondary: ['Upper Chest','Core'],
-    steps: [
-      'Start in a downward dog position — hips high, straight legs.',
-      'Lower the top of your head towards the floor between your hands.',
-      'Press back up to the start position.',
-      'The more vertical your body, the more shoulder-focused it becomes.'
-    ],
-    tip: '💡 This is the bodyweight progression towards the handstand push-up.'
-  },
-  'Tricep Dips': {
-    muscles: ['Triceps','Anterior Deltoids'],
-    secondary: ['Chest','Core'],
-    steps: [
-      'Grip parallel bars or the edge of a bench, arms extended.',
-      'Lower your body by bending your elbows until they reach ~90°.',
-      'Keep elbows pointing back, not flaring out wide.',
-      'Press back up to the start.'
-    ],
-    tip: '💡 Leaning forward shifts emphasis to chest. Stay upright for triceps.'
-  },
-  'Plank': {
-    muscles: ['Core','Transverse Abdominis'],
-    secondary: ['Shoulders','Glutes','Back'],
-    steps: [
-      'Forearms on the floor, elbows under your shoulders.',
-      'Body in a straight line from head to heels.',
-      'Brace your core, squeeze your glutes.',
-      'Hold the position — breathe steadily.',
-      'Don\'t let your hips drop or rise.'
-    ],
-    tip: '💡 Quality over time — a 20-second perfect plank beats a 60-second sagging one.'
-  },
-  'Inverted Row': {
-    muscles: ['Lats','Rhomboids','Rear Deltoids','Biceps'],
-    secondary: ['Core','Forearms'],
-    steps: [
-      'Set a bar at waist height. Hang below it, heels on the floor.',
-      'Keep your body in a straight line.',
-      'Pull your chest to the bar, leading with your elbows.',
-      'Squeeze your shoulder blades together at the top.',
-      'Lower with control.'
-    ],
-    tip: '💡 Make it harder by lowering the bar. Make it easier by raising it.'
-  }
+// ══════════════════════════════
+//  EXERCISE LIBRARY
+// ══════════════════════════════
+const EX={
+  'Bench Press':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Lie flat on the bench, feet planted on the floor.','Grip the bar just wider than shoulder-width, wrists straight.','Unrack and hold the bar directly above your chest.','Lower to your mid-chest with control, elbows at ~45°.','Press back up powerfully to the start position.','Keep your upper back tight throughout.'],tip:'💡 Squeeze the bar like you\'re trying to bend it inward to engage your chest more.'},
+  'Squat':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Core','Lower Back','Calves'],steps:['Bar across your upper traps, feet shoulder-width apart.','Brace your core and take a deep breath in.','Push knees out and descend until thighs are parallel or below.','Drive through your heels and mid-foot to stand back up.','Keep your chest tall and spine neutral throughout.'],tip:'💡 Think "push the floor away" rather than "pull yourself up".'},
+  'Deadlift':{muscles:['Hamstrings','Glutes','Lower Back'],secondary:['Traps','Forearms','Core','Quads'],steps:['Stand feet hip-width, bar over mid-foot.','Hinge at hips and grip the bar just outside your legs.','Deep breath, brace core, pull chest tall.','Push the floor away as you drag the bar up your shins.','Lock out at the top by squeezing glutes.','Lower with control, hinging at the hips first.'],tip:'💡 Imagine pushing the floor apart with your feet as you lift.'},
+  'Barbell Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back','Traps'],steps:['Hinge forward until torso is roughly 45°.','Pull the bar to your lower chest, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control back to the start.','Keep your lower back flat throughout.'],tip:'💡 Think "elbows to back pockets" to feel it more in your lats.'},
+  'Overhead Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Chest','Traps','Core'],steps:['Hold bar at shoulder height, just outside shoulder-width.','Brace core and glutes — keep your body rigid.','Press the bar straight up, moving head back slightly.','At the top, shrug your traps up to protect shoulders.','Lower with control back to the start.'],tip:'💡 Squeeze your glutes hard — it protects your lower back during the press.'},
+  'Romanian Deadlift':{muscles:['Hamstrings','Glutes'],secondary:['Lower Back','Calves'],steps:['Stand feet hip-width, bar at hip height.','Push hips back while keeping your back flat.','Lower the bar down your thighs until you feel a strong hamstring stretch.','Drive hips forward to return to standing.','Keep a slight bend in your knees throughout.'],tip:'💡 Focus on feeling the stretch in your hamstrings — don\'t just lower the weight.'},
+  'Pull-up':{muscles:['Lats','Biceps','Rear Deltoids'],secondary:['Rhomboids','Core','Forearms'],steps:['Hang from bar with overhand grip, wider than shoulder-width.','Depress shoulder blades before pulling.','Pull chest towards the bar, driving elbows down and back.','Pause briefly at the top, chin above the bar.','Lower with full control to a dead hang.'],tip:'💡 Think "elbows to hips" — this activates your lats far more than just pulling up.'},
+  'Chin-up':{muscles:['Biceps','Lats'],secondary:['Rear Deltoids','Core','Forearms'],steps:['Hang with underhand grip at shoulder-width.','Pull chest up towards the bar, leading with elbows.','Keep your body still — no swinging.','Lower slowly with full control to dead hang.'],tip:'💡 Supinated grip means more bicep — great for arm size as well as back width.'},
+  'Lat Pulldown':{muscles:['Lats','Rear Deltoids','Biceps'],secondary:['Rhomboids','Teres Major'],steps:['Grip bar wider than shoulder-width, palms facing away.','Lean back slightly and pull bar to your upper chest.','Lead with elbows — drive them down and back.','Squeeze your lats at the bottom, hold briefly.','Return bar up slowly with control.'],tip:'💡 Imagine trying to put the bar in your back pockets.'},
+  'Incline Dumbbell Press':{muscles:['Upper Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Set bench to 30–45°. Dumbbells at shoulder level, palms forward.','Press both dumbbells up and slightly inward.','Lower with control, elbows at about 45° from body.','Feel the stretch at the bottom before pressing again.'],tip:'💡 30° hits upper chest better than 45° — most people go too steep.'},
+  'Dumbbell Curl':{muscles:['Biceps','Brachialis'],secondary:['Forearms'],steps:['Stand holding dumbbells at sides, palms forward.','Curl both up towards shoulders, elbows fixed.','Squeeze hard at the top.','Lower slowly — take 3 seconds on the way down.'],tip:'💡 The slow lowering phase builds more muscle than the curl up.'},
+  'Tricep Pushdown':{muscles:['Triceps'],secondary:['Forearms'],steps:['Set cable high, attach bar or rope.','Grip with elbows tucked at your sides.','Push down until arms are fully extended.','Squeeze triceps hard at the bottom.','Return slowly, letting elbows bend to ~90° at the top.'],tip:'💡 Keep elbows pinned to your sides throughout — don\'t let them flare.'},
+  'Face Pull':{muscles:['Rear Deltoids','Rotator Cuff','Rhomboids'],secondary:['Traps','Biceps'],steps:['Set cable to face height, use rope attachment.','Pull rope towards your face, hands to either side of your head.','Keep elbows high and flared out throughout.','Squeeze rear delts and hold for a second.','Return slowly to the start.'],tip:'💡 Face pulls are one of the best shoulder health exercises — don\'t skip them.'},
+  'Hip Thrust':{muscles:['Glutes','Hamstrings'],secondary:['Core','Quads'],steps:['Upper back against a bench, bar across your hips.','Plant feet flat, hip-width apart.','Drive hips up by squeezing glutes hard.','At the top, torso should be parallel to the floor.','Lower with control and repeat.'],tip:'💡 Tuck your chin and focus on a posterior pelvic tilt at the top for max glute activation.'},
+  'Leg Press':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Calves'],steps:['Sit in machine with feet hip-width on the platform.','Release safety and lower platform by bending knees.','Go as deep as comfortably possible without lower back rounding.','Push through your full foot to extend legs.','Do not lock out knees at the top.'],tip:'💡 High feet = more glutes/hamstrings, low feet = more quads.'},
+  'Cable Fly':{muscles:['Chest','Anterior Deltoids'],secondary:['Biceps'],steps:['Set cables at chest height, stand in the centre with one foot forward.','Hold handles with a slight bend in your elbows.','Bring hands together in an arc in front of your chest.','Squeeze chest hard when hands meet.','Return slowly, feeling the chest stretch.'],tip:'💡 Keep the same elbow bend throughout — don\'t let them bend more as you press.'},
+  'Bulgarian Split Squat':{muscles:['Quads','Glutes'],secondary:['Hamstrings','Core','Calves'],steps:['Stand a metre in front of a bench, one foot on it behind you.','Lower back knee towards the floor.','Keep front shin as vertical as possible.','Drive through front heel to return to start.','Complete all reps one leg before switching.'],tip:'💡 Most people stand too close — give yourself more room forward.'},
+  'Seated Cable Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back'],steps:['Sit with feet on rests, knees slightly bent.','Pull handle to lower sternum, elbows close to body.','Squeeze shoulder blades together at the end.','Extend arms slowly back to start — feel the stretch.'],tip:'💡 Avoid rocking back — drive should come from your arms and back, not torso.'},
+  'Dumbbell Shoulder Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Traps','Core'],steps:['Sit with back support, dumbbells at shoulder height.','Press both dumbbells up and slightly inward.','Don\'t let them clang at the top.','Lower back to shoulder height with control.'],tip:'💡 A slight forward lean can help if you have shoulder mobility issues.'},
+  'Calf Raise':{muscles:['Gastrocnemius','Soleus'],secondary:[],steps:['Stand with balls of feet on a raised surface.','Lower heels as far as comfortable to stretch calves.','Rise up on toes as high as possible.','Pause and squeeze at the top.','Lower slowly — 3 seconds down.'],tip:'💡 Calves respond best to both heavy weight and high reps — train both ways.'},
+  'Push-up':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Core','Serratus Anterior'],steps:['Hands just wider than shoulder-width, body in a straight line.','Lower chest to just above the floor, elbows at ~45°.','Press back up powerfully.','Keep core braced — don\'t let hips sag.'],tip:'💡 Elevate feet to increase difficulty; elevate hands on a bench to make easier.'},
+  'Pike Push-up':{muscles:['Anterior Deltoids','Triceps'],secondary:['Upper Chest','Core'],steps:['Start in a downward dog position — hips high, straight legs.','Lower the top of your head towards the floor between your hands.','Press back up to the start position.','The more vertical your body, the more shoulder-focused it becomes.'],tip:'💡 This is the bodyweight progression towards the handstand push-up.'},
+  'Tricep Dips':{muscles:['Triceps','Anterior Deltoids'],secondary:['Chest','Core'],steps:['Grip parallel bars or bench edge, arms extended.','Lower body by bending elbows to ~90°.','Keep elbows pointing back, not flaring out.','Press back up to the start.'],tip:'💡 Lean forward for more chest. Stay upright for more triceps.'},
+  'Plank':{muscles:['Core','Transverse Abdominis'],secondary:['Shoulders','Glutes','Back'],steps:['Forearms on floor, elbows under your shoulders.','Body in a straight line from head to heels.','Brace core, squeeze glutes.','Hold — breathe steadily.','Don\'t let hips drop or rise.'],tip:'💡 A 20-second perfect plank beats a 60-second sagging one.'},
+  'Inverted Row':{muscles:['Lats','Rhomboids','Rear Deltoids','Biceps'],secondary:['Core','Forearms'],steps:['Set bar at waist height. Hang below it, heels on the floor.','Keep body in a straight line.','Pull chest to the bar, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control.'],tip:'💡 Lower the bar to make it harder. Raise it to make it easier.'}
 };
 
-function showDemo(name) {
+function showDemo(name){
   openM('mdemo');
-  const ex = EX[name] || EX[Object.keys(EX).find(k => k.toLowerCase() === name.toLowerCase())];
-  const ytQuery = encodeURIComponent(name + ' exercise form tutorial');
-  const ytUrl = 'https://www.youtube.com/results?search_query=' + ytQuery;
-
-  if (!ex) {
-    document.getElementById('dgw').innerHTML = '';
-    document.getElementById('demo-title').textContent = name;
-    document.getElementById('demo-muscles').innerHTML = '';
-    document.getElementById('demo-steps').innerHTML = '';
-    document.getElementById('demo-nf').style.display = 'block';
-    document.getElementById('demo-nf').innerHTML = '<div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-size:14px;color:var(--txt2);line-height:1.5;margin-bottom:16px;">No guide found for "' + name + '"</div><a href="' + ytUrl + '" target="_blank" class="btn btn-p btn-f" style="text-decoration:none;">Watch on YouTube ↗</a>';
+  const ex=EX[name]||EX[Object.keys(EX).find(k=>k.toLowerCase()===name.toLowerCase())];
+  const ytUrl='https://www.youtube.com/results?search_query='+encodeURIComponent(name+' exercise form tutorial');
+  document.getElementById('demo-nf').style.display='none';
+  if(!ex){
+    document.getElementById('dgw').innerHTML='';
+    document.getElementById('demo-title').textContent=name;
+    document.getElementById('demo-muscles').innerHTML='';
+    document.getElementById('demo-steps').innerHTML='';
+    document.getElementById('demo-nf').style.display='block';
+    document.getElementById('demo-yt').href=ytUrl;
     return;
   }
-
-  document.getElementById('demo-nf').style.display = 'none';
-
-  // Muscle diagram (SVG silhouette with highlighted regions)
-  document.getElementById('dgw').innerHTML = buildMuscleDiagram(ex.muscles);
-
-  document.getElementById('demo-title').textContent = name;
-
-  // Muscles
-  const pm = ex.muscles || [];
-  const sm = ex.secondary || [];
-  document.getElementById('demo-muscles').innerHTML =
-    pm.map(m => '<span class="mtag pri">' + m + '</span>').join('') +
-    sm.map(m => '<span class="mtag">' + m + '</span>').join('');
-
-  // Steps
-  const stepHTML = ex.steps.map((s, i) =>
-    '<div class="step-row"><div class="step-num">' + (i+1) + '</div><div class="step-txt">' + s + '</div></div>'
-  ).join('');
-
-  const tipHTML = ex.tip ? '<div style="background:rgba(200,240,76,.08);border:.5px solid rgba(200,240,76,.2);border-radius:var(--rs);padding:10px 14px;margin:12px 0;font-size:12px;color:var(--acc);line-height:1.55;">' + ex.tip + '</div>' : '';
-
-  document.getElementById('demo-steps').innerHTML =
-    '<div style="font-size:12px;font-weight:500;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">How to perform</div>' +
-    stepHTML + tipHTML +
-    '<a href="' + ytUrl + '" target="_blank" class="btn btn-g btn-f" style="text-decoration:none;margin-top:8px;display:flex;">▶ Watch on YouTube</a>';
+  document.getElementById('dgw').innerHTML=buildDiagram(ex.muscles);
+  document.getElementById('demo-title').textContent=name;
+  document.getElementById('demo-muscles').innerHTML=
+    (ex.muscles||[]).map(m=>'<span class="mtag pri">'+m+'</span>').join('')+
+    (ex.secondary||[]).map(m=>'<span class="mtag">'+m+'</span>').join('');
+  const steps=ex.steps||[];
+  document.getElementById('demo-steps').innerHTML=
+    '<div style="font-size:12px;font-weight:500;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">How to perform</div>'+
+    steps.map((s,i)=>'<div class="step-row"><div class="step-num">'+(i+1)+'</div><div class="step-txt">'+s+'</div></div>').join('')+
+    (ex.tip?'<div style="background:rgba(200,240,76,.08);border:.5px solid rgba(200,240,76,.2);border-radius:var(--rs);padding:10px 14px;margin:12px 0;font-size:12px;color:var(--acc);line-height:1.55;">'+ex.tip+'</div>':'')+
+    '<a href="'+ytUrl+'" target="_blank" class="btn btn-g btn-f" style="text-decoration:none;margin-top:8px;display:flex;">▶ Watch on YouTube</a>';
 }
 
-function buildMuscleDiagram(muscles) {
-  // Map muscle names to body regions with colours
-  const regionMap = {
-    'Chest': 'chest', 'Pectorals': 'chest',
-    'Quads': 'quads', 'Quadriceps': 'quads',
-    'Hamstrings': 'hamstrings',
-    'Glutes': 'glutes',
-    'Lats': 'lats', 'Latissimus Dorsi': 'lats',
-    'Biceps': 'biceps',
-    'Triceps': 'triceps',
-    'Anterior Deltoids': 'front-delt', 'Lateral Deltoids': 'side-delt', 'Rear Deltoids': 'rear-delt',
-    'Shoulders': 'front-delt',
-    'Core': 'core', 'Transverse Abdominis': 'core', 'Abs': 'core',
-    'Lower Back': 'lower-back',
-    'Calves': 'calves', 'Gastrocnemius': 'calves', 'Soleus': 'calves',
-    'Traps': 'traps', 'Upper Traps': 'traps',
-    'Rhomboids': 'upper-back', 'Upper Back': 'upper-back',
-    'Forearms': 'forearms',
-    'Serratus Anterior': 'chest',
-    'Teres Major': 'lats',
-    'Rotator Cuff': 'rear-delt',
-    'Brachialis': 'biceps'
-  };
-
-  const active = new Set(muscles.map(m => regionMap[m]).filter(Boolean));
-
-  // Colour regions
-  const c = (region) => active.has(region) ? '#c8f04c' : '#242432';
-  const cs = (region) => active.has(region) ? '#c8f04c' : '#1c1c26'; // slightly lighter for back
-
-  return `<svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;display:block;margin:0 auto;">
-  <!-- FRONT VIEW -->
-  <!-- Head -->
-  <ellipse cx="70" cy="22" rx="14" ry="16" fill="#1c1c26" stroke="#242432" stroke-width="1"/>
-  <!-- Neck -->
-  <rect x="64" y="36" width="12" height="10" rx="4" fill="#1c1c26"/>
-  <!-- Chest -->
-  <ellipse cx="58" cy="65" rx="16" ry="13" fill="${c('chest')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="82" cy="65" rx="16" ry="13" fill="${c('chest')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Front delts -->
-  <ellipse cx="42" cy="55" rx="9" ry="10" fill="${c('front-delt')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="98" cy="55" rx="9" ry="10" fill="${c('front-delt')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Core -->
-  <rect x="60" y="78" width="20" height="28" rx="6" fill="${c('core')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Quads -->
-  <ellipse cx="58" cy="148" rx="13" ry="22" fill="${c('quads')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="82" cy="148" rx="13" ry="22" fill="${c('quads')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Calves front -->
-  <ellipse cx="58" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="82" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Biceps -->
-  <ellipse cx="32" cy="78" rx="7" ry="16" fill="${c('biceps')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="108" cy="78" rx="7" ry="16" fill="${c('biceps')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Forearms front -->
-  <ellipse cx="28" cy="108" rx="6" ry="14" fill="${c('forearms')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="112" cy="108" rx="6" ry="14" fill="${c('forearms')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Label -->
-  <text x="70" y="274" text-anchor="middle" fill="#4a4a60" font-size="9" font-family="DM Sans,sans-serif">FRONT</text>
-
-  <!-- BACK VIEW -->
-  <!-- Head -->
-  <ellipse cx="160" cy="22" rx="14" ry="16" fill="#1c1c26" stroke="#242432" stroke-width="1"/>
-  <!-- Traps -->
-  <ellipse cx="160" cy="48" rx="22" ry="10" fill="${cs('traps')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Rear delts -->
-  <ellipse cx="132" cy="55" rx="9" ry="10" fill="${cs('rear-delt')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="188" cy="55" rx="9" ry="10" fill="${cs('rear-delt')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Upper back / rhomboids -->
-  <ellipse cx="148" cy="68" rx="13" ry="11" fill="${cs('upper-back')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="172" cy="68" rx="13" ry="11" fill="${cs('upper-back')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Lats -->
-  <ellipse cx="140" cy="88" rx="12" ry="18" fill="${cs('lats')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="180" cy="88" rx="12" ry="18" fill="${cs('lats')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Lower back -->
-  <rect x="149" y="100" width="22" height="16" rx="5" fill="${cs('lower-back')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Glutes -->
-  <ellipse cx="151" cy="128" rx="14" ry="14" fill="${cs('glutes')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="169" cy="128" rx="14" ry="14" fill="${cs('glutes')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Hamstrings -->
-  <ellipse cx="151" cy="160" rx="12" ry="20" fill="${cs('hamstrings')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="169" cy="160" rx="12" ry="20" fill="${cs('hamstrings')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Calves back -->
-  <ellipse cx="151" cy="215" rx="9" ry="18" fill="${cs('calves')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="169" cy="215" rx="9" ry="18" fill="${cs('calves')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Triceps -->
-  <ellipse cx="122" cy="78" rx="7" ry="16" fill="${cs('triceps')}" stroke="#13131a" stroke-width="0.5"/>
-  <ellipse cx="198" cy="78" rx="7" ry="16" fill="${cs('triceps')}" stroke="#13131a" stroke-width="0.5"/>
-  <!-- Label -->
-  <text x="160" y="274" text-anchor="middle" fill="#4a4a60" font-size="9" font-family="DM Sans,sans-serif">BACK</text>
+function buildDiagram(muscles){
+  const rm={'Chest':'chest','Quads':'quads','Quadriceps':'quads','Hamstrings':'hamstrings','Glutes':'glutes','Lats':'lats','Biceps':'biceps','Triceps':'triceps','Anterior Deltoids':'front-delt','Lateral Deltoids':'side-delt','Rear Deltoids':'rear-delt','Shoulders':'front-delt','Core':'core','Transverse Abdominis':'core','Lower Back':'lower-back','Calves':'calves','Gastrocnemius':'calves','Soleus':'calves','Traps':'traps','Upper Traps':'traps','Rhomboids':'upper-back','Brachialis':'biceps','Rotator Cuff':'rear-delt','Serratus Anterior':'chest','Teres Major':'lats','Forearms':'forearms','Upper Chest':'chest'};
+  const act=new Set((muscles||[]).map(m=>rm[m]).filter(Boolean));
+  const c=r=>act.has(r)?'#c8f04c':'#242432';
+  return`<svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;display:block;margin:0 auto;">
+<ellipse cx="70" cy="22" rx="14" ry="16" fill="#1c1c26" stroke="#242432" stroke-width="1"/>
+<rect x="64" y="36" width="12" height="10" rx="4" fill="#1c1c26"/>
+<ellipse cx="58" cy="65" rx="16" ry="13" fill="${c('chest')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="82" cy="65" rx="16" ry="13" fill="${c('chest')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="42" cy="55" rx="9" ry="10" fill="${c('front-delt')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="98" cy="55" rx="9" ry="10" fill="${c('front-delt')}" stroke="#13131a" stroke-width="0.5"/>
+<rect x="60" y="78" width="20" height="28" rx="6" fill="${c('core')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="58" cy="148" rx="13" ry="22" fill="${c('quads')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="82" cy="148" rx="13" ry="22" fill="${c('quads')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="58" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="82" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="32" cy="78" rx="7" ry="16" fill="${c('biceps')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="108" cy="78" rx="7" ry="16" fill="${c('biceps')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="28" cy="108" rx="6" ry="14" fill="${c('forearms')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="112" cy="108" rx="6" ry="14" fill="${c('forearms')}" stroke="#13131a" stroke-width="0.5"/>
+<text x="70" y="274" text-anchor="middle" fill="#4a4a60" font-size="9" font-family="DM Sans,sans-serif">FRONT</text>
+<ellipse cx="160" cy="22" rx="14" ry="16" fill="#1c1c26" stroke="#242432" stroke-width="1"/>
+<ellipse cx="160" cy="48" rx="22" ry="10" fill="${c('traps')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="132" cy="55" rx="9" ry="10" fill="${c('rear-delt')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="188" cy="55" rx="9" ry="10" fill="${c('rear-delt')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="148" cy="68" rx="13" ry="11" fill="${c('upper-back')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="172" cy="68" rx="13" ry="11" fill="${c('upper-back')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="140" cy="88" rx="12" ry="18" fill="${c('lats')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="180" cy="88" rx="12" ry="18" fill="${c('lats')}" stroke="#13131a" stroke-width="0.5"/>
+<rect x="149" y="100" width="22" height="16" rx="5" fill="${c('lower-back')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="151" cy="128" rx="14" ry="14" fill="${c('glutes')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="169" cy="128" rx="14" ry="14" fill="${c('glutes')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="151" cy="160" rx="12" ry="20" fill="${c('hamstrings')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="169" cy="160" rx="12" ry="20" fill="${c('hamstrings')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="151" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="169" cy="215" rx="9" ry="18" fill="${c('calves')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="122" cy="78" rx="7" ry="16" fill="${c('triceps')}" stroke="#13131a" stroke-width="0.5"/>
+<ellipse cx="198" cy="78" rx="7" ry="16" fill="${c('triceps')}" stroke="#13131a" stroke-width="0.5"/>
+<text x="160" y="274" text-anchor="middle" fill="#4a4a60" font-size="9" font-family="DM Sans,sans-serif">BACK</text>
 </svg>`;
 }
 
-
-
-// ══════════════════════════════════
+// ══════════════════════════════
 //  PROGRAMMES
-// ══════════════════════════════════
+// ══════════════════════════════
 const PROGS=[
-  {id:'sl5',name:'StrongLifts 5×5',tag:'3 DAYS · BEGINNER',level:'Beginner',
-   desc:'Add weight every session. The most proven beginner strength programme.',
-   goals:['Increase strength','Build muscle'],
-   days:[
-     {label:'Workout A',exs:[{n:'Squat',s:5,r:'5'},{n:'Bench Press',s:5,r:'5'},{n:'Barbell Row',s:5,r:'5'}]},
-     {label:'Workout B',exs:[{n:'Squat',s:5,r:'5'},{n:'Overhead Press',s:5,r:'5'},{n:'Deadlift',s:1,r:'5'}]}]},
-  {id:'ppl',name:'Push / Pull / Legs',tag:'3–6 DAYS · INTERMEDIATE',level:'Intermediate',
-   desc:'Classic split for balanced hypertrophy and strength. Run 1× or 2× per week.',
-   goals:['Build muscle','Increase strength'],
-   days:[
-     {label:'Push',exs:[{n:'Bench Press',s:4,r:'8–10'},{n:'Overhead Press',s:3,r:'10–12'},{n:'Incline Dumbbell Press',s:3,r:'10–12'},{n:'Cable Fly',s:3,r:'12–15'},{n:'Tricep Pushdown',s:3,r:'12–15'}]},
-     {label:'Pull',exs:[{n:'Deadlift',s:3,r:'5–6'},{n:'Barbell Row',s:4,r:'8–10'},{n:'Lat Pulldown',s:3,r:'10–12'},{n:'Face Pull',s:3,r:'15–20'},{n:'Dumbbell Curl',s:3,r:'12–15'}]},
-     {label:'Legs',exs:[{n:'Squat',s:4,r:'8–10'},{n:'Romanian Deadlift',s:3,r:'10–12'},{n:'Leg Press',s:3,r:'12–15'},{n:'Hip Thrust',s:3,r:'12–15'},{n:'Calf Raise',s:4,r:'15–20'}]}]},
-  {id:'ul4',name:'Upper / Lower',tag:'4 DAYS · INTERMEDIATE',level:'Intermediate',
-   desc:'4-day split with high frequency. Ideal for strength and muscle gains.',
-   goals:['Build muscle','Increase strength','Improve endurance'],
-   days:[
-     {label:'Upper A',exs:[{n:'Bench Press',s:4,r:'6–8'},{n:'Barbell Row',s:4,r:'6–8'},{n:'Overhead Press',s:3,r:'8–10'},{n:'Lat Pulldown',s:3,r:'10–12'},{n:'Dumbbell Curl',s:2,r:'12–15'},{n:'Tricep Pushdown',s:2,r:'12–15'}]},
-     {label:'Lower A',exs:[{n:'Squat',s:4,r:'6–8'},{n:'Romanian Deadlift',s:3,r:'8–10'},{n:'Leg Press',s:3,r:'10–12'},{n:'Hip Thrust',s:3,r:'12–15'},{n:'Calf Raise',s:3,r:'15'}]},
-     {label:'Upper B',exs:[{n:'Incline Dumbbell Press',s:4,r:'8–10'},{n:'Seated Cable Row',s:4,r:'10–12'},{n:'Dumbbell Shoulder Press',s:3,r:'10–12'},{n:'Face Pull',s:3,r:'15–20'},{n:'Dumbbell Curl',s:3,r:'12'}]},
-     {label:'Lower B',exs:[{n:'Deadlift',s:4,r:'5–6'},{n:'Bulgarian Split Squat',s:3,r:'10 each'},{n:'Leg Press',s:3,r:'12–15'},{n:'Hip Thrust',s:4,r:'10–12'}]}]},
-  {id:'fb3',name:'Full Body 3×/week',tag:'3 DAYS · BEGINNER',level:'Beginner',
-   desc:'Hit every muscle 3× per week. Great for fat loss, beginners, and busy schedules.',
-   goals:['General fitness','Lose fat','Rehab / recovery'],
-   days:[
-     {label:'Day A',exs:[{n:'Squat',s:3,r:'10–12'},{n:'Bench Press',s:3,r:'10–12'},{n:'Barbell Row',s:3,r:'10–12'},{n:'Overhead Press',s:2,r:'12'},{n:'Romanian Deadlift',s:3,r:'12'}]},
-     {label:'Day B',exs:[{n:'Deadlift',s:3,r:'8'},{n:'Incline Dumbbell Press',s:3,r:'10–12'},{n:'Pull-up',s:3,r:'6–10'},{n:'Dumbbell Shoulder Press',s:3,r:'12'},{n:'Hip Thrust',s:3,r:'12–15'}]}]},
-  {id:'bw',name:'Bodyweight Fundamentals',tag:'3 DAYS · ANY LEVEL',level:'All levels',
-   desc:'Zero equipment. Build real strength with calisthenics progressions.',
-   goals:['General fitness','Build muscle','Improve flexibility'],
-   days:[
-     {label:'Push',exs:[{n:'Push-up',s:4,r:'10–15'},{n:'Pike Push-up',s:3,r:'8–12'},{n:'Tricep Dips',s:3,r:'10–15'},{n:'Plank',s:3,r:'45s'}]},
-     {label:'Pull',exs:[{n:'Pull-up',s:4,r:'5–10'},{n:'Chin-up',s:3,r:'5–8'},{n:'Inverted Row',s:3,r:'8–12'}]},
-     {label:'Legs + Core',exs:[{n:'Squat',s:4,r:'15–20'},{n:'Bulgarian Split Squat',s:3,r:'10 each'},{n:'Hip Thrust',s:3,r:'15'},{n:'Plank',s:3,r:'60s'}]}]},
-  {id:'end',name:'Endurance Base',tag:'4–5 DAYS · ANY LEVEL',level:'All levels',
-   desc:'Build cardiovascular fitness and muscular endurance with higher reps.',
-   goals:['Improve endurance','Lose fat','Sport performance'],
-   days:[
-     {label:'Circuit A',exs:[{n:'Squat',s:4,r:'15–20'},{n:'Push-up',s:4,r:'15–20'},{n:'Barbell Row',s:4,r:'15'},{n:'Plank',s:3,r:'60s'}]},
-     {label:'Circuit B',exs:[{n:'Romanian Deadlift',s:4,r:'15'},{n:'Dumbbell Shoulder Press',s:4,r:'15'},{n:'Pull-up',s:3,r:'8–12'},{n:'Hip Thrust',s:4,r:'20'}]},
-     {label:'Circuit C',exs:[{n:'Bulgarian Split Squat',s:3,r:'15 each'},{n:'Incline Dumbbell Press',s:4,r:'15'},{n:'Seated Cable Row',s:4,r:'15'},{n:'Face Pull',s:3,r:'20'}]}]}
+  {id:'sl5',name:'StrongLifts 5×5',tag:'3 DAYS · BEGINNER',level:'Beginner',desc:'Add weight every session. The most proven beginner strength programme.',goals:['Increase strength','Build muscle'],days:[{label:'Workout A',exs:[{n:'Squat',s:5,r:'5'},{n:'Bench Press',s:5,r:'5'},{n:'Barbell Row',s:5,r:'5'}]},{label:'Workout B',exs:[{n:'Squat',s:5,r:'5'},{n:'Overhead Press',s:5,r:'5'},{n:'Deadlift',s:1,r:'5'}]}]},
+  {id:'ppl',name:'Push / Pull / Legs',tag:'3–6 DAYS · INTERMEDIATE',level:'Intermediate',desc:'Classic split for balanced hypertrophy and strength. Run 1× or 2× per week.',goals:['Build muscle','Increase strength'],days:[{label:'Push',exs:[{n:'Bench Press',s:4,r:'8–10'},{n:'Overhead Press',s:3,r:'10–12'},{n:'Incline Dumbbell Press',s:3,r:'10–12'},{n:'Cable Fly',s:3,r:'12–15'},{n:'Tricep Pushdown',s:3,r:'12–15'}]},{label:'Pull',exs:[{n:'Deadlift',s:3,r:'5–6'},{n:'Barbell Row',s:4,r:'8–10'},{n:'Lat Pulldown',s:3,r:'10–12'},{n:'Face Pull',s:3,r:'15–20'},{n:'Dumbbell Curl',s:3,r:'12–15'}]},{label:'Legs',exs:[{n:'Squat',s:4,r:'8–10'},{n:'Romanian Deadlift',s:3,r:'10–12'},{n:'Leg Press',s:3,r:'12–15'},{n:'Hip Thrust',s:3,r:'12–15'},{n:'Calf Raise',s:4,r:'15–20'}]}]},
+  {id:'ul4',name:'Upper / Lower',tag:'4 DAYS · INTERMEDIATE',level:'Intermediate',desc:'4-day split with high frequency. Ideal for strength and muscle gains.',goals:['Build muscle','Increase strength','Improve endurance'],days:[{label:'Upper A',exs:[{n:'Bench Press',s:4,r:'6–8'},{n:'Barbell Row',s:4,r:'6–8'},{n:'Overhead Press',s:3,r:'8–10'},{n:'Lat Pulldown',s:3,r:'10–12'},{n:'Dumbbell Curl',s:2,r:'12–15'},{n:'Tricep Pushdown',s:2,r:'12–15'}]},{label:'Lower A',exs:[{n:'Squat',s:4,r:'6–8'},{n:'Romanian Deadlift',s:3,r:'8–10'},{n:'Leg Press',s:3,r:'10–12'},{n:'Hip Thrust',s:3,r:'12–15'},{n:'Calf Raise',s:3,r:'15'}]},{label:'Upper B',exs:[{n:'Incline Dumbbell Press',s:4,r:'8–10'},{n:'Seated Cable Row',s:4,r:'10–12'},{n:'Dumbbell Shoulder Press',s:3,r:'10–12'},{n:'Face Pull',s:3,r:'15–20'},{n:'Dumbbell Curl',s:3,r:'12'}]},{label:'Lower B',exs:[{n:'Deadlift',s:4,r:'5–6'},{n:'Bulgarian Split Squat',s:3,r:'10 each'},{n:'Leg Press',s:3,r:'12–15'},{n:'Hip Thrust',s:4,r:'10–12'}]}]},
+  {id:'fb3',name:'Full Body 3×/week',tag:'3 DAYS · BEGINNER',level:'Beginner',desc:'Hit every muscle 3× per week. Great for fat loss, beginners, and busy schedules.',goals:['General fitness','Lose fat','Rehab / recovery'],days:[{label:'Day A',exs:[{n:'Squat',s:3,r:'10–12'},{n:'Bench Press',s:3,r:'10–12'},{n:'Barbell Row',s:3,r:'10–12'},{n:'Overhead Press',s:2,r:'12'},{n:'Romanian Deadlift',s:3,r:'12'}]},{label:'Day B',exs:[{n:'Deadlift',s:3,r:'8'},{n:'Incline Dumbbell Press',s:3,r:'10–12'},{n:'Pull-up',s:3,r:'6–10'},{n:'Dumbbell Shoulder Press',s:3,r:'12'},{n:'Hip Thrust',s:3,r:'12–15'}]}]},
+  {id:'bw',name:'Bodyweight Fundamentals',tag:'3 DAYS · ANY LEVEL',level:'All levels',desc:'Zero equipment. Build real strength with calisthenics progressions.',goals:['General fitness','Build muscle','Improve flexibility'],days:[{label:'Push',exs:[{n:'Push-up',s:4,r:'10–15'},{n:'Pike Push-up',s:3,r:'8–12'},{n:'Tricep Dips',s:3,r:'10–15'},{n:'Plank',s:3,r:'45s'}]},{label:'Pull',exs:[{n:'Pull-up',s:4,r:'5–10'},{n:'Chin-up',s:3,r:'5–8'},{n:'Inverted Row',s:3,r:'8–12'}]},{label:'Legs + Core',exs:[{n:'Squat',s:4,r:'15–20'},{n:'Bulgarian Split Squat',s:3,r:'10 each'},{n:'Hip Thrust',s:3,r:'15'},{n:'Plank',s:3,r:'60s'}]}]},
+  {id:'end',name:'Endurance Base',tag:'4–5 DAYS · ANY LEVEL',level:'All levels',desc:'Build cardiovascular fitness and muscular endurance with higher reps.',goals:['Improve endurance','Lose fat','Sport performance'],days:[{label:'Circuit A',exs:[{n:'Squat',s:4,r:'15–20'},{n:'Push-up',s:4,r:'15–20'},{n:'Barbell Row',s:4,r:'15'},{n:'Plank',s:3,r:'60s'}]},{label:'Circuit B',exs:[{n:'Romanian Deadlift',s:4,r:'15'},{n:'Dumbbell Shoulder Press',s:4,r:'15'},{n:'Pull-up',s:3,r:'8–12'},{n:'Hip Thrust',s:4,r:'20'}]},{label:'Circuit C',exs:[{n:'Bulgarian Split Squat',s:3,r:'15 each'},{n:'Incline Dumbbell Press',s:4,r:'15'},{n:'Seated Cable Row',s:4,r:'15'},{n:'Face Pull',s:3,r:'20'}]}]}
 ];
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  PROGRESSIVE OVERLOAD
-// ══════════════════════════════════
-function getProgTip(uid,exName){
-  const hist=S.workouts.filter(w=>w.userId===uid)
-    .flatMap(w=>(w.exercises||[]).map(e=>({...e,date:w.date})))
-    .filter(e=>e.name&&e.name.toLowerCase()===exName.toLowerCase())
-    .sort((a,b)=>new Date(a.date)-new Date(b.date));
+// ══════════════════════════════
+function getProgTip(exName){
+  const hist=S.workouts.flatMap(w=>(w.exercises||[]).map(e=>({...e,date:w.date}))).filter(e=>e.name&&e.name.toLowerCase()===exName.toLowerCase()).sort((a,b)=>new Date(a.date)-new Date(b.date));
   if(!hist.length)return null;
   const last=hist[hist.length-1];
   if(!last.sets||!last.sets.length)return null;
   const avgW=last.sets.reduce((a,s)=>a+(parseFloat(s.weight)||0),0)/last.sets.length;
   const avgR=last.sets.reduce((a,s)=>a+(parseInt(s.reps)||0),0)/last.sets.length;
   const isLower=['squat','deadlift','leg press','hip thrust','lunge'].some(k=>exName.toLowerCase().includes(k));
-  if(hist.length>=2){
-    const prev=hist[hist.length-2];
-    const prevW=prev.sets.reduce((a,s)=>a+(parseFloat(s.weight)||0),0)/prev.sets.length;
-    if(avgW>=prevW&&avgR>=10)return '📈 Last: '+avgW+'kg × '+Math.round(avgR)+' reps — try '+(avgW+(isLower?5:2.5))+'kg!';
-  }
-  if(avgW>0)return 'Last logged: '+avgW+'kg × '+Math.round(avgR)+' reps';
+  if(hist.length>=2){const prev=hist[hist.length-2];const prevW=prev.sets.reduce((a,s)=>a+(parseFloat(s.weight)||0),0)/prev.sets.length;if(avgW>=prevW&&avgR>=10)return'📈 Last: '+avgW+'kg × '+Math.round(avgR)+' reps — try '+(avgW+(isLower?5:2.5))+'kg!';}
+  if(avgW>0)return'Last logged: '+avgW+'kg × '+Math.round(avgR)+' reps';
   return null;
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  ONBOARDING
-// ══════════════════════════════════
+// ══════════════════════════════
 let obStep=0;
-const CS={g1:[],eq1:[],g2:[]};
+const CS={g1:[],eq1:[]};
 function tc(el,g){el.classList.toggle('sel');CS[g]=CS[g]||[];const v=el.dataset.v;if(el.classList.contains('sel'))CS[g].push(v);else CS[g]=CS[g].filter(x=>x!==v);}
 function obb(){if(obStep>0){obStep--;showOb();}}
 function obn(){
-  if(obStep===0){const n=document.getElementById('u1n').value.trim();if(!n){alert('Please enter your name');return;}S.users[0].name=n;S.users[1].name=document.getElementById('u2n').value.trim()||'Partner';document.getElementById('ob1tag').textContent=S.users[0].name.toUpperCase();}
-  else if(obStep===1){S.users[0].goals=CS.g1;S.users[0].level=document.getElementById('l1').value;S.users[0].injuries=document.getElementById('inj1').value;document.getElementById('ob2tag').textContent=S.users[0].name.toUpperCase();}
-  else if(obStep===2){S.users[0].equipment=CS.eq1;S.users[0].days=document.getElementById('d1').value;S.users[0].duration=document.getElementById('dur1').value;S.users[1].equipment=CS.eq1;document.getElementById('ob3tag').textContent=S.users[1].name.toUpperCase();}
-  else if(obStep===3){S.users[1].goals=CS.g2;S.users[1].level=document.getElementById('l2').value;S.users[1].injuries=document.getElementById('inj2').value;S.users[1].days=document.getElementById('d2').value;autoplan(0);autoplan(1);buildSumm();}
-  obStep++;if(obStep>=5)return;showOb();
+  if(obStep===0){const n=document.getElementById('u1n').value.trim();if(!n){alert('Please enter your name');return;}S.user.name=n;document.getElementById('ob1tag').textContent=n.toUpperCase();}
+  else if(obStep===1){S.user.goals=CS.g1;S.user.level=document.getElementById('l1').value;S.user.injuries=document.getElementById('inj1').value;document.getElementById('ob2tag').textContent=S.user.name.toUpperCase();}
+  else if(obStep===2){S.user.equipment=CS.eq1;S.user.days=document.getElementById('d1').value;S.user.duration=document.getElementById('dur1').value;autoplan();buildSumm();}
+  obStep++;if(obStep>=4)return;showOb();
 }
 function showOb(){document.querySelectorAll('.obs').forEach((s,i)=>s.classList.toggle('on',i===obStep));document.querySelectorAll('.pip').forEach((p,i)=>p.classList.toggle('on',i<=obStep));}
-function autoplan(uid){
-  const u=S.users[uid];
+function autoplan(){
+  const u=S.user;
   const bw=u.equipment&&u.equipment.length===1&&u.equipment[0]==='Bodyweight only';
   if(bw){u.plan='bw';return;}
   const g=u.goals&&u.goals[0],days=parseInt(u.days)||3;
@@ -948,14 +538,14 @@ function autoplan(uid){
   u.plan='fb3';
 }
 function buildSumm(){
-  const[a,b]=S.users,pa=PROGS.find(p=>p.id===a.plan),pb=PROGS.find(p=>p.id===b.plan);
-  document.getElementById('obsumm').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div><div style="font-size:12px;color:var(--acc);font-weight:600;margin-bottom:8px;">'+a.name+'</div><div style="font-size:12px;color:var(--txt2);line-height:1.8;">'+a.goals.slice(0,2).join(', ')+'<br>'+a.level+'<br><span style="color:var(--txt)">'+(pa?pa.name:'—')+'</span></div></div><div><div style="font-size:12px;color:var(--acc2);font-weight:600;margin-bottom:8px;">'+b.name+'</div><div style="font-size:12px;color:var(--txt2);line-height:1.8;">'+b.goals.slice(0,2).join(', ')+'<br>'+b.level+'<br><span style="color:var(--txt)">'+(pb?pb.name:'—')+'</span></div></div></div>';
+  const u=S.user,p=PROGS.find(pr=>pr.id===u.plan);
+  document.getElementById('obsumm').innerHTML='<div style="font-size:13px;color:var(--txt2);line-height:2;">Goals: <span style="color:var(--txt)">'+u.goals.slice(0,2).join(', ')+'</span><br>Level: <span style="color:var(--txt)">'+u.level+'</span><br>Programme: <span style="color:var(--acc)">'+(p?p.name:'—')+'</span></div>';
 }
 function finishOb(){S.done=true;save();document.getElementById('obs').style.display='none';initApp();}
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  NAV
-// ══════════════════════════════════
+// ══════════════════════════════
 function showTab(t){
   document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
@@ -964,24 +554,24 @@ function showTab(t){
   if(t==='home')renderHome();if(t==='history')renderHist();if(t==='plans')renderPlans();if(t==='profile')renderProfile();
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  TIMER
-// ══════════════════════════════════
+// ══════════════════════════════
 let tv=0,tr=false,ti=null;
 function setT(s){tv=s;tr=false;clearInterval(ti);updT();document.getElementById('ttog').textContent='Start';}
 function togT(){if(tr){clearInterval(ti);tr=false;document.getElementById('ttog').textContent='Start';}else{tr=true;document.getElementById('ttog').textContent='Stop';ti=setInterval(()=>{if(tv>0){tv--;updT();}else{clearInterval(ti);tr=false;document.getElementById('ttog').textContent='Start';if(navigator.vibrate)navigator.vibrate([200,100,200]);}},1000);}}
 function updT(){const m=Math.floor(tv/60),s=tv%60;document.getElementById('tdisp').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  MODAL
-// ══════════════════════════════════
+// ══════════════════════════════
 function openM(id){document.getElementById(id).classList.add('on');}
 function closeM(id){document.getElementById(id).classList.remove('on');}
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  LOGGER
-// ══════════════════════════════════
-function showProgTip(){const nm=document.getElementById('newex').value.trim();const t=getProgTip(S.cu,nm);const el=document.getElementById('ptip');if(t){el.style.display='block';el.textContent=t;}else el.style.display='none';}
+// ══════════════════════════════
+function showProgTip(){const nm=document.getElementById('newex').value.trim();const t=getProgTip(nm);const el=document.getElementById('ptip');if(t){el.style.display='block';el.textContent=t;}else el.style.display='none';}
 function addEx(){
   const nm=document.getElementById('newex').value.trim();if(!nm){alert('Enter an exercise name');return;}
   const sets=parseInt(document.getElementById('newsets').value)||3;
@@ -997,7 +587,7 @@ function renderLog(){
     const esc=ex.name.replace(/'/g,"\\'");
     return '<div class="lc"><div class="lch" onclick="togBody('+ei+')"><div style="flex:1;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span class="lcn">'+ex.name+'</span><button class="dbtn" onclick="event.stopPropagation();showDemo(\''+esc+'\')">▶ Demo</button></div><div class="lcm">'+ex.sets.length+' sets'+(ex.sets[0].weight?' · '+ex.sets[0].weight+'kg':'')+'</div></div><span style="color:var(--txt3);font-size:20px;margin-left:8px;">›</span></div><div class="lcb" id="lb'+ei+'"><div class="srow" style="margin-bottom:4px;"><div class="slbl" style="font-size:10px;">SET</div><div class="slbl" style="font-size:10px;">REPS</div><div class="slbl" style="font-size:10px;">KG</div><div></div></div>'+ex.sets.map((s,si)=>'<div class="srow"><div class="slbl">'+(si+1)+'</div><input class="si" type="number" value="'+s.reps+'" min="1" onchange="updS('+ei+','+si+',\'reps\',this.value)"><input class="si" type="number" value="'+s.weight+'" min="0" step="0.5" onchange="updS('+ei+','+si+',\'weight\',this.value)"><button class="sdel" onclick="delS('+ei+','+si+')">×</button></div>').join('')+'<div id="it'+ei+'" style="margin-top:4px;font-size:11px;color:var(--acc2);"></div><div class="la"><button class="btn btn-g btn-s" onclick="addS('+ei+')" style="flex:1;">+ Set</button><button class="btn btn-d btn-s" onclick="remEx('+ei+')" style="flex:1;">Remove</button></div></div></div>';
   }).join('');
-  S.session.forEach((ex,i)=>{const t=getProgTip(S.cu,ex.name);const el=document.getElementById('it'+i);if(el&&t)el.textContent=t;});
+  S.session.forEach((ex,i)=>{const t=getProgTip(ex.name);const el=document.getElementById('it'+i);if(el&&t)el.textContent=t;});
 }
 function togBody(i){document.getElementById('lb'+i).classList.toggle('on');}
 function updS(ei,si,f,v){S.session[ei].sets[si][f]=parseFloat(v)||0;}
@@ -1008,40 +598,40 @@ function saveWO(){
   if(!S.session.length){alert('Add at least one exercise');return;}
   const nm=document.getElementById('svnm').value.trim()||'Session';
   const nt=document.getElementById('svnt').value.trim();
-  S.workouts.unshift({id:Date.now(),userId:S.cu,name:nm,date:new Date().toISOString(),exercises:JSON.parse(JSON.stringify(S.session)),notes:nt,totalSets:S.session.reduce((a,e)=>a+e.sets.length,0)});
+  S.workouts.unshift({id:Date.now(),name:nm,date:new Date().toISOString(),exercises:JSON.parse(JSON.stringify(S.session)),notes:nt,totalSets:S.session.reduce((a,e)=>a+e.sets.length,0)});
   S.session=[];save();closeM('msave');document.getElementById('svnm').value='';document.getElementById('svnt').value='';renderLog();showTab('history');
 }
 function loadPlanIntoLog(){
-  const prog=getAP(S.cu);if(!prog){showTab('plans');return;}
+  const prog=getAP();if(!prog){showTab('plans');return;}
   const di=new Date().getDay()%prog.days.length,day=prog.days[di];
   S.session=day.exs.map(e=>({name:e.n,sets:Array.from({length:e.s||3},()=>({reps:parseInt(e.r)||10,weight:0}))}));
   document.getElementById('logsub').textContent=day.label+' — '+prog.name;
   showTab('log');renderLog();
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  HOME
-// ══════════════════════════════════
-function getAP(uid){return PROGS.find(p=>p.id===S.users[uid].plan)||null;}
+// ══════════════════════════════
+function getAP(){return PROGS.find(p=>p.id===S.user.plan)||null;}
 function calcStreak(wos){if(!wos.length)return 0;const days=[...new Set(wos.map(w=>new Date(w.date).toDateString()))].sort((a,b)=>new Date(b)-new Date(a));let streak=0,cur=new Date();for(const d of days){const diff=Math.round((cur-new Date(d))/86400000);if(diff<=1){streak++;cur=new Date(d);}else break;}return streak;}
 function renderHome(){
-  const u=S.users[S.cu],now=new Date(),h=now.getHours();
+  const u=S.user,now=new Date(),h=now.getHours();
   document.getElementById('hgr').textContent=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
   document.getElementById('hdt').textContent=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   document.getElementById('hnm').textContent=u.name||'Athlete';
   document.getElementById('htg').textContent=['Ready to train?','Let\'s get after it.','Consistency wins.','Your best session starts now.','Make it count.'][now.getDay()%5];
   document.getElementById('hav').textContent=(u.name||'?').charAt(0).toUpperCase();
-  const mw=S.workouts.filter(w=>w.userId===S.cu),wa=Date.now()-7*86400000;
-  document.getElementById('sst').textContent=calcStreak(mw);
-  document.getElementById('stt').textContent=mw.length;
-  document.getElementById('swk').textContent=mw.filter(w=>new Date(w.date)>wa).length;
+  const wa=Date.now()-7*86400000;
+  document.getElementById('sst').textContent=calcStreak(S.workouts);
+  document.getElementById('stt').textContent=S.workouts.length;
+  document.getElementById('swk').textContent=S.workouts.filter(w=>new Date(w.date)>wa).length;
   renderTodayCard();
-  const prog=getAP(S.cu),tipEl=document.getElementById('htip');
-  if(prog&&mw.length>0){const di=new Date().getDay()%prog.days.length,fx=prog.days[di].exs[0],t=getProgTip(S.cu,fx.n);tipEl.innerHTML=t?'<div style="background:rgba(124,111,205,.1);border:.5px solid rgba(124,111,205,.3);border-radius:var(--rs);padding:10px 14px;margin:0 16px 14px;font-size:12px;color:var(--acc2);">🧠 '+t+'</div>':'';}else tipEl.innerHTML='';
-  const rec=mw.slice(0,2);document.getElementById('hrec').innerHTML=rec.length?rec.map(hcHTML).join(''):'<div style="font-size:13px;color:var(--txt2);padding-bottom:8px;">No sessions yet — start logging!</div>';
+  const prog=getAP(),tipEl=document.getElementById('htip');
+  if(prog&&S.workouts.length>0){const di=new Date().getDay()%prog.days.length,fx=prog.days[di].exs[0],t=getProgTip(fx.n);tipEl.innerHTML=t?'<div style="background:rgba(124,111,205,.1);border:.5px solid rgba(124,111,205,.3);border-radius:var(--rs);padding:10px 14px;margin:0 16px 14px;font-size:12px;color:var(--acc2);">🧠 '+t+'</div>':'';}else tipEl.innerHTML='';
+  const rec=S.workouts.slice(0,2);document.getElementById('hrec').innerHTML=rec.length?rec.map(hcHTML).join(''):'<div style="font-size:13px;color:var(--txt2);padding-bottom:8px;">No sessions yet — start logging!</div>';
 }
 function renderTodayCard(){
-  const prog=getAP(S.cu);
+  const prog=getAP();
   if(!prog){document.getElementById('twtg').textContent='NO PLAN';document.getElementById('twnm').textContent='Pick a programme';document.getElementById('twexs').innerHTML='<div style="padding:14px 16px;font-size:13px;color:var(--txt2);">Go to Plans to choose your programme.</div>';return;}
   const di=new Date().getDay()%prog.days.length,day=prog.days[di];
   document.getElementById('twtg').textContent=prog.name.toUpperCase();
@@ -1052,15 +642,13 @@ function renderTodayCard(){
   }).join('');
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  HISTORY
-// ══════════════════════════════════
-function swHU(i){S.hu=i;renderHist();}
+// ══════════════════════════════
 function renderHist(){
-  document.getElementById('hsn1').textContent=S.users[0].name||'You';document.getElementById('hsn2').textContent=S.users[1].name||'Partner';
-  document.getElementById('hsu1').classList.toggle('on',S.hu===0);document.getElementById('hsu2').classList.toggle('on',S.hu===1);
-  const wos=S.workouts.filter(w=>w.userId===S.hu),el=document.getElementById('histlist');
-  el.innerHTML=wos.length?wos.map(hcHTML).join(''):'<div class="es"><div class="ei">📋</div><div class="et">No sessions yet</div><div class="em">Log a workout to see history here.</div></div>';
+  document.getElementById('hist-sub').textContent=S.user.name ? S.user.name+"'s sessions" : '';
+  const el=document.getElementById('histlist');
+  el.innerHTML=S.workouts.length?S.workouts.map(hcHTML).join(''):'<div class="es"><div class="ei">📋</div><div class="et">No sessions yet</div><div class="em">Log a workout to see your history here.</div></div>';
 }
 function hcHTML(w){
   const d=new Date(w.date);
@@ -1068,47 +656,41 @@ function hcHTML(w){
   return '<div class="hc"><div class="hdb"><div class="hday">'+d.getDate()+'</div><div class="hmon">'+d.toLocaleString('en',{month:'short'})+'</div></div><div class="hi"><div class="hn">'+w.name+'</div><div class="hm">'+(w.exercises?w.exercises.length:0)+' exercises · '+(w.totalSets||0)+' sets'+(w.notes?' · '+w.notes.substring(0,28)+'…':'')+'</div></div><div class="hv">'+(vol>0?Math.round(vol)+'<div style="font-size:10px;color:var(--txt3)">kg vol</div>':(w.totalSets||0)+'<div style="font-size:10px;color:var(--txt3)">sets</div>')+'</div></div>';
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  PLANS
-// ══════════════════════════════════
-function swPU(i){S.pu=i;renderPlans();}
+// ══════════════════════════════
 function renderPlans(){
-  const uid=S.pu;
-  document.getElementById('pln1').textContent=S.users[0].name||'You';document.getElementById('pln2').textContent=S.users[1].name||'Partner';
-  document.getElementById('plu1').classList.toggle('on',uid===0);document.getElementById('plu2').classList.toggle('on',uid===1);
-  const active=S.users[uid].plan;
+  const active=S.user.plan;
   document.getElementById('planslist').innerHTML=PROGS.map(p=>
     '<div class="pc '+(p.id===active?'acp':'')+'"><div class="pch" onclick="togProg(\''+p.id+'\')"><div style="flex:1;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;"><span class="pbadge">'+p.tag+'</span>'+(p.id===active?'<span style="font-size:10px;font-weight:600;color:var(--acc);margin-left:auto;">ACTIVE ✓</span>':'')+'</div><div style="font-size:15px;font-weight:500;">'+p.name+'</div><div style="font-size:12px;color:var(--txt2);margin-top:3px;">'+p.desc+'</div></div><span style="color:var(--txt3);font-size:20px;margin-left:8px;flex-shrink:0;">›</span></div><div class="pcd" id="pd'+p.id+'">'+
     p.days.map(d=>'<div class="pdr"><div class="pdl">'+d.label+'</div><div class="pde">'+d.exs.map(e=>'<span class="dbtn" style="cursor:pointer;" onclick="showDemo(\''+e.n.replace(/'/g,"\\'")+'\')">'+e.n+'</span> '+e.s+'×'+e.r).join(' · ')+'</div></div>').join('')+
-    '<div style="margin-top:14px;">'+(p.id===active?'<button class="btn btn-g btn-s" onclick="event.stopPropagation();setPlan('+uid+',null)">Remove plan</button>':'<button class="btn btn-p btn-s" onclick="event.stopPropagation();setPlan('+uid+',\''+p.id+'\')">Start this programme →</button>')+'</div></div></div>'
+    '<div style="margin-top:14px;">'+(p.id===active?'<button class="btn btn-g btn-s" onclick="event.stopPropagation();setPlan(null)">Remove plan</button>':'<button class="btn btn-p btn-s" onclick="event.stopPropagation();setPlan(\''+p.id+'\')">Start this programme →</button>')+'</div></div></div>'
   ).join('');
 }
 function togProg(id){document.getElementById('pd'+id).classList.toggle('on');}
-function setPlan(uid,pid){S.users[uid].plan=pid;save();renderPlans();if(uid===S.cu)renderHome();}
+function setPlan(pid){S.user.plan=pid;save();renderPlans();renderHome();}
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  PROFILE
-// ══════════════════════════════════
-function swPrU(i){S.pru=i;renderProfile();}
+// ══════════════════════════════
 function renderProfile(){
-  const i=S.pru,u=S.users[i];
-  document.getElementById('pfn1').textContent=S.users[0].name||'You';document.getElementById('pfn2').textContent=S.users[1].name||'Partner';
-  document.getElementById('pfu1').classList.toggle('on',i===0);document.getElementById('pfu2').classList.toggle('on',i===1);
+  const u=S.user;
   document.getElementById('ppav').textContent=(u.name||'?').charAt(0).toUpperCase();
-  document.getElementById('ppnm').textContent=u.name||'Athlete';document.getElementById('pplv').textContent=u.level||'';
-  const mw=S.workouts.filter(w=>w.userId===i);
-  document.getElementById('ppwo').textContent=mw.length;document.getElementById('ppst').textContent=calcStreak(mw);
-  document.getElementById('ppse').textContent=mw.reduce((a,w)=>a+(w.totalSets||0),0);
+  document.getElementById('ppnm').textContent=u.name||'Athlete';
+  document.getElementById('pplv').textContent=u.level||'';
+  document.getElementById('ppwo').textContent=S.workouts.length;
+  document.getElementById('ppst').textContent=calcStreak(S.workouts);
+  document.getElementById('ppse').textContent=S.workouts.reduce((a,w)=>a+(w.totalSets||0),0);
   document.getElementById('pfgl').textContent=(u.goals||[]).join(', ')||'Not set';
   document.getElementById('pfeq').textContent=(u.equipment||[]).join(', ')||'Not set';
   document.getElementById('pfdy').textContent=u.days?u.days+' days/week':'Not set';
-  document.getElementById('pfpl').textContent=(getAP(i)||{name:'None'}).name;
+  document.getElementById('pfpl').textContent=(getAP()||{name:'None'}).name;
   document.getElementById('pfij').textContent=u.injuries||'None';
 }
 
-// ══════════════════════════════════
+// ══════════════════════════════
 //  BOOT
-// ══════════════════════════════════
+// ══════════════════════════════
 function initApp(){renderHome();renderHist();renderPlans();renderProfile();renderLog();showTab('home');}
 load();
 if(S.done){document.getElementById('obs').style.display='none';initApp();}
