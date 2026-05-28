@@ -165,6 +165,14 @@ textarea{resize:none;min-height:80px;}
 .step-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
 .step-num{width:22px;height:22px;border-radius:50%;background:var(--acc2);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .step-txt{font-size:13px;color:var(--txt2);line-height:1.55;}
+
+/* REPLACE MODAL */
+.rgroup-label{font-size:11px;font-weight:600;color:var(--txt3);letter-spacing:.06em;text-transform:uppercase;margin:14px 0 8px;}
+.rgroup-label:first-child{margin-top:0;}
+.rex-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--sur2);border:.5px solid var(--sur3);border-radius:var(--rs);padding:11px 14px;margin-bottom:7px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--txt);-webkit-tap-highlight-color:transparent;text-align:left;}
+.rex-btn:active{opacity:.7;}
+.rex-btn .same{font-size:10px;color:var(--acc);font-weight:600;margin-left:8px;}
+
 </style>
 </head>
 <body>
@@ -385,35 +393,76 @@ const save=()=>localStorage.setItem('fc6',JSON.stringify(S));
 const load=()=>{const d=localStorage.getItem('fc6');if(d)try{S=Object.assign({},S,JSON.parse(d));}catch(e){}};
 
 // ══════════════════════════════
-//  EXERCISE LIBRARY
+//  EXERCISE DATABASE — 150+ exercises grouped by muscle
+// ══════════════════════════════
+const EXDB = {
+  chest: { label:'Chest', exercises:['Bench Press','Incline Bench Press','Decline Bench Press','Incline Dumbbell Press','Flat Dumbbell Press','Decline Dumbbell Press','Cable Fly','Low Cable Fly','High Cable Fly','Incline Cable Fly','Dumbbell Fly','Incline Dumbbell Fly','Push-up','Wide Push-up','Diamond Push-up','Decline Push-up','Incline Push-up','Chest Dip','Machine Chest Press','Machine Fly','Pec Deck','Landmine Press','Svend Press'] },
+  back: { label:'Back', exercises:['Deadlift','Sumo Deadlift','Romanian Deadlift','Stiff-Leg Deadlift','Barbell Row','Pendlay Row','Yates Row','T-Bar Row','Dumbbell Row','Meadows Row','Cable Row','Seated Cable Row','Low Cable Row','Pull-up','Chin-up','Neutral Grip Pull-up','Weighted Pull-up','Lat Pulldown','Close Grip Lat Pulldown','Single Arm Lat Pulldown','Straight Arm Pulldown','Face Pull','Band Pull-Apart','Inverted Row','TRX Row','Good Morning','Hyperextension','Rack Pull','Shrug','Dumbbell Shrug','Farmer Carry'] },
+  shoulders: { label:'Shoulders', exercises:['Overhead Press','Seated Overhead Press','Push Press','Dumbbell Shoulder Press','Arnold Press','Z Press','Lateral Raise','Cable Lateral Raise','Machine Lateral Raise','Front Raise','Dumbbell Front Raise','Plate Front Raise','Rear Delt Fly','Reverse Pec Deck','Cable Rear Delt Fly','Upright Row','Face Pull','Cable Face Pull','Pike Push-up','Handstand Push-up','Landmine Lateral Raise','Cuban Press','Band Pull-Apart'] },
+  legs: { label:'Legs', exercises:['Squat','Front Squat','Box Squat','Pause Squat','Leg Press','Hack Squat','Smith Machine Squat','Bulgarian Split Squat','Lunge','Walking Lunge','Reverse Lunge','Lateral Lunge','Step Up','Box Jump','Jump Squat','Romanian Deadlift','Nordic Curl','Leg Curl','Seated Leg Curl','Lying Leg Curl','Leg Extension','Sissy Squat','Hip Thrust','Glute Bridge','Single Leg Hip Thrust','Cable Kickback','Calf Raise','Seated Calf Raise','Single Leg Calf Raise','Goblet Squat','Sumo Squat','Pistol Squat'] },
+  arms: { label:'Arms', exercises:['Barbell Curl','EZ Bar Curl','Dumbbell Curl','Hammer Curl','Reverse Curl','Concentration Curl','Spider Curl','Preacher Curl','Cable Curl','Incline Dumbbell Curl','Cross Body Curl','Zottman Curl','Tricep Pushdown','Rope Pushdown','Overhead Tricep Extension','Skull Crusher','Close Grip Bench Press','Tricep Dips','Bench Dip','Diamond Push-up','Kickback','Single Arm Overhead Extension','Wrist Curl','Reverse Wrist Curl'] },
+  core: { label:'Core', exercises:['Plank','Side Plank','RKC Plank','Weighted Plank','Ab Wheel Rollout','Hollow Body Hold','Dead Bug','Hanging Knee Raise','Hanging Leg Raise','Toes to Bar','Cable Crunch','Decline Crunch','Bicycle Crunch','Russian Twist','Pallof Press','Landmine Rotation','Dragon Flag','L-Sit','V-Up','Sit-up','Bird Dog','McGill Curl-up','Suitcase Carry','Windmill'] },
+  cardio: { label:'Cardio', exercises:['Treadmill Run','Rowing Machine','Stationary Bike','Assault Bike','Stair Climber','Elliptical','Jump Rope','Box Jump','Burpee','Mountain Climber','Kettlebell Swing','Kettlebell Snatch','Clean and Press','Battle Ropes','Sled Push','Sled Pull','Sprint Intervals','Hill Sprint'] }
+};
+
+const ALL_EXERCISES = Object.values(EXDB).flatMap(g => g.exercises);
+
+function findGroup(name){
+  const lower=name.toLowerCase();
+  for(const[key,group]of Object.entries(EXDB)){if(group.exercises.some(e=>e.toLowerCase()===lower))return key;}
+  return null;
+}
+function getAlternatives(name){
+  const gKey=findGroup(name);
+  if(!gKey)return ALL_EXERCISES.filter(e=>e.toLowerCase()!==name.toLowerCase()).slice(0,24);
+  return EXDB[gKey].exercises.filter(e=>e.toLowerCase()!==name.toLowerCase());
+}
+
+// ══════════════════════════════
+//  EXERCISE LIBRARY (instructions + muscle diagrams)
 // ══════════════════════════════
 const EX={
-  'Bench Press':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Lie flat on the bench, feet planted on the floor.','Grip the bar just wider than shoulder-width, wrists straight.','Unrack and hold the bar directly above your chest.','Lower to your mid-chest with control, elbows at ~45°.','Press back up powerfully to the start position.','Keep your upper back tight throughout.'],tip:'💡 Squeeze the bar like you\'re trying to bend it inward to engage your chest more.'},
-  'Squat':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Core','Lower Back','Calves'],steps:['Bar across your upper traps, feet shoulder-width apart.','Brace your core and take a deep breath in.','Push knees out and descend until thighs are parallel or below.','Drive through your heels and mid-foot to stand back up.','Keep your chest tall and spine neutral throughout.'],tip:'💡 Think "push the floor away" rather than "pull yourself up".'},
-  'Deadlift':{muscles:['Hamstrings','Glutes','Lower Back'],secondary:['Traps','Forearms','Core','Quads'],steps:['Stand feet hip-width, bar over mid-foot.','Hinge at hips and grip the bar just outside your legs.','Deep breath, brace core, pull chest tall.','Push the floor away as you drag the bar up your shins.','Lock out at the top by squeezing glutes.','Lower with control, hinging at the hips first.'],tip:'💡 Imagine pushing the floor apart with your feet as you lift.'},
-  'Barbell Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back','Traps'],steps:['Hinge forward until torso is roughly 45°.','Pull the bar to your lower chest, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control back to the start.','Keep your lower back flat throughout.'],tip:'💡 Think "elbows to back pockets" to feel it more in your lats.'},
-  'Overhead Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Chest','Traps','Core'],steps:['Hold bar at shoulder height, just outside shoulder-width.','Brace core and glutes — keep your body rigid.','Press the bar straight up, moving head back slightly.','At the top, shrug your traps up to protect shoulders.','Lower with control back to the start.'],tip:'💡 Squeeze your glutes hard — it protects your lower back during the press.'},
-  'Romanian Deadlift':{muscles:['Hamstrings','Glutes'],secondary:['Lower Back','Calves'],steps:['Stand feet hip-width, bar at hip height.','Push hips back while keeping your back flat.','Lower the bar down your thighs until you feel a strong hamstring stretch.','Drive hips forward to return to standing.','Keep a slight bend in your knees throughout.'],tip:'💡 Focus on feeling the stretch in your hamstrings — don\'t just lower the weight.'},
-  'Pull-up':{muscles:['Lats','Biceps','Rear Deltoids'],secondary:['Rhomboids','Core','Forearms'],steps:['Hang from bar with overhand grip, wider than shoulder-width.','Depress shoulder blades before pulling.','Pull chest towards the bar, driving elbows down and back.','Pause briefly at the top, chin above the bar.','Lower with full control to a dead hang.'],tip:'💡 Think "elbows to hips" — this activates your lats far more than just pulling up.'},
-  'Chin-up':{muscles:['Biceps','Lats'],secondary:['Rear Deltoids','Core','Forearms'],steps:['Hang with underhand grip at shoulder-width.','Pull chest up towards the bar, leading with elbows.','Keep your body still — no swinging.','Lower slowly with full control to dead hang.'],tip:'💡 Supinated grip means more bicep — great for arm size as well as back width.'},
-  'Lat Pulldown':{muscles:['Lats','Rear Deltoids','Biceps'],secondary:['Rhomboids','Teres Major'],steps:['Grip bar wider than shoulder-width, palms facing away.','Lean back slightly and pull bar to your upper chest.','Lead with elbows — drive them down and back.','Squeeze your lats at the bottom, hold briefly.','Return bar up slowly with control.'],tip:'💡 Imagine trying to put the bar in your back pockets.'},
-  'Incline Dumbbell Press':{muscles:['Upper Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Set bench to 30–45°. Dumbbells at shoulder level, palms forward.','Press both dumbbells up and slightly inward.','Lower with control, elbows at about 45° from body.','Feel the stretch at the bottom before pressing again.'],tip:'💡 30° hits upper chest better than 45° — most people go too steep.'},
-  'Dumbbell Curl':{muscles:['Biceps','Brachialis'],secondary:['Forearms'],steps:['Stand holding dumbbells at sides, palms forward.','Curl both up towards shoulders, elbows fixed.','Squeeze hard at the top.','Lower slowly — take 3 seconds on the way down.'],tip:'💡 The slow lowering phase builds more muscle than the curl up.'},
-  'Tricep Pushdown':{muscles:['Triceps'],secondary:['Forearms'],steps:['Set cable high, attach bar or rope.','Grip with elbows tucked at your sides.','Push down until arms are fully extended.','Squeeze triceps hard at the bottom.','Return slowly, letting elbows bend to ~90° at the top.'],tip:'💡 Keep elbows pinned to your sides throughout — don\'t let them flare.'},
-  'Face Pull':{muscles:['Rear Deltoids','Rotator Cuff','Rhomboids'],secondary:['Traps','Biceps'],steps:['Set cable to face height, use rope attachment.','Pull rope towards your face, hands to either side of your head.','Keep elbows high and flared out throughout.','Squeeze rear delts and hold for a second.','Return slowly to the start.'],tip:'💡 Face pulls are one of the best shoulder health exercises — don\'t skip them.'},
-  'Hip Thrust':{muscles:['Glutes','Hamstrings'],secondary:['Core','Quads'],steps:['Upper back against a bench, bar across your hips.','Plant feet flat, hip-width apart.','Drive hips up by squeezing glutes hard.','At the top, torso should be parallel to the floor.','Lower with control and repeat.'],tip:'💡 Tuck your chin and focus on a posterior pelvic tilt at the top for max glute activation.'},
-  'Leg Press':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Calves'],steps:['Sit in machine with feet hip-width on the platform.','Release safety and lower platform by bending knees.','Go as deep as comfortably possible without lower back rounding.','Push through your full foot to extend legs.','Do not lock out knees at the top.'],tip:'💡 High feet = more glutes/hamstrings, low feet = more quads.'},
-  'Cable Fly':{muscles:['Chest','Anterior Deltoids'],secondary:['Biceps'],steps:['Set cables at chest height, stand in the centre with one foot forward.','Hold handles with a slight bend in your elbows.','Bring hands together in an arc in front of your chest.','Squeeze chest hard when hands meet.','Return slowly, feeling the chest stretch.'],tip:'💡 Keep the same elbow bend throughout — don\'t let them bend more as you press.'},
-  'Bulgarian Split Squat':{muscles:['Quads','Glutes'],secondary:['Hamstrings','Core','Calves'],steps:['Stand a metre in front of a bench, one foot on it behind you.','Lower back knee towards the floor.','Keep front shin as vertical as possible.','Drive through front heel to return to start.','Complete all reps one leg before switching.'],tip:'💡 Most people stand too close — give yourself more room forward.'},
-  'Seated Cable Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back'],steps:['Sit with feet on rests, knees slightly bent.','Pull handle to lower sternum, elbows close to body.','Squeeze shoulder blades together at the end.','Extend arms slowly back to start — feel the stretch.'],tip:'💡 Avoid rocking back — drive should come from your arms and back, not torso.'},
-  'Dumbbell Shoulder Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Traps','Core'],steps:['Sit with back support, dumbbells at shoulder height.','Press both dumbbells up and slightly inward.','Don\'t let them clang at the top.','Lower back to shoulder height with control.'],tip:'💡 A slight forward lean can help if you have shoulder mobility issues.'},
-  'Calf Raise':{muscles:['Gastrocnemius','Soleus'],secondary:[],steps:['Stand with balls of feet on a raised surface.','Lower heels as far as comfortable to stretch calves.','Rise up on toes as high as possible.','Pause and squeeze at the top.','Lower slowly — 3 seconds down.'],tip:'💡 Calves respond best to both heavy weight and high reps — train both ways.'},
-  'Push-up':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Core','Serratus Anterior'],steps:['Hands just wider than shoulder-width, body in a straight line.','Lower chest to just above the floor, elbows at ~45°.','Press back up powerfully.','Keep core braced — don\'t let hips sag.'],tip:'💡 Elevate feet to increase difficulty; elevate hands on a bench to make easier.'},
-  'Pike Push-up':{muscles:['Anterior Deltoids','Triceps'],secondary:['Upper Chest','Core'],steps:['Start in a downward dog position — hips high, straight legs.','Lower the top of your head towards the floor between your hands.','Press back up to the start position.','The more vertical your body, the more shoulder-focused it becomes.'],tip:'💡 This is the bodyweight progression towards the handstand push-up.'},
-  'Tricep Dips':{muscles:['Triceps','Anterior Deltoids'],secondary:['Chest','Core'],steps:['Grip parallel bars or bench edge, arms extended.','Lower body by bending elbows to ~90°.','Keep elbows pointing back, not flaring out.','Press back up to the start.'],tip:'💡 Lean forward for more chest. Stay upright for more triceps.'},
-  'Plank':{muscles:['Core','Transverse Abdominis'],secondary:['Shoulders','Glutes','Back'],steps:['Forearms on floor, elbows under your shoulders.','Body in a straight line from head to heels.','Brace core, squeeze glutes.','Hold — breathe steadily.','Don\'t let hips drop or rise.'],tip:'💡 A 20-second perfect plank beats a 60-second sagging one.'},
-  'Inverted Row':{muscles:['Lats','Rhomboids','Rear Deltoids','Biceps'],secondary:['Core','Forearms'],steps:['Set bar at waist height. Hang below it, heels on the floor.','Keep body in a straight line.','Pull chest to the bar, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control.'],tip:'💡 Lower the bar to make it harder. Raise it to make it easier.'}
+  'Bench Press':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Lie flat on the bench, feet planted on the floor.','Grip the bar just wider than shoulder-width, wrists straight.','Unrack and hold the bar directly above your chest.','Lower to your mid-chest with control, elbows at ~45°.','Press back up powerfully to the start position.','Keep your upper back tight throughout.'],tip:"💡 Squeeze the bar like you're trying to bend it inward to engage your chest more."},
+  'Squat':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Core','Lower Back','Calves'],steps:['Bar across your upper traps, feet shoulder-width apart.','Brace your core and take a deep breath in.','Push knees out and descend until thighs are parallel or below.','Drive through your heels and mid-foot to stand back up.','Keep your chest tall and spine neutral throughout.'],tip:"💡 Think 'push the floor away' rather than 'pull yourself up'."},
+  'Deadlift':{muscles:['Hamstrings','Glutes','Lower Back'],secondary:['Traps','Forearms','Core','Quads'],steps:['Stand feet hip-width, bar over mid-foot.','Hinge at hips and grip the bar just outside your legs.','Deep breath, brace core, pull chest tall.','Push the floor away as you drag the bar up your shins.','Lock out at the top by squeezing glutes.','Lower with control, hinging at the hips first.'],tip:"💡 Imagine pushing the floor apart with your feet as you lift."},
+  'Barbell Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back','Traps'],steps:['Hinge forward until torso is roughly 45°.','Pull the bar to your lower chest, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control back to the start.','Keep your lower back flat throughout.'],tip:"💡 Think 'elbows to back pockets' to feel it more in your lats."},
+  'Overhead Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Chest','Traps','Core'],steps:['Hold bar at shoulder height, just outside shoulder-width.','Brace core and glutes — keep your body rigid.','Press the bar straight up, moving head back slightly.','At the top, shrug your traps up to protect shoulders.','Lower with control back to the start.'],tip:"💡 Squeeze your glutes hard — it protects your lower back during the press."},
+  'Romanian Deadlift':{muscles:['Hamstrings','Glutes'],secondary:['Lower Back','Calves'],steps:['Stand feet hip-width, bar at hip height.','Push hips back while keeping your back flat.','Lower the bar down your thighs until you feel a strong hamstring stretch.','Drive hips forward to return to standing.','Keep a slight bend in your knees throughout.'],tip:"💡 Focus on feeling the stretch in your hamstrings — don't just lower the weight."},
+  'Pull-up':{muscles:['Lats','Biceps','Rear Deltoids'],secondary:['Rhomboids','Core','Forearms'],steps:['Hang from bar with overhand grip, wider than shoulder-width.','Depress shoulder blades before pulling.','Pull chest towards the bar, driving elbows down and back.','Pause briefly at the top, chin above the bar.','Lower with full control to a dead hang.'],tip:"💡 Think 'elbows to hips' — this activates your lats far more than just pulling up."},
+  'Chin-up':{muscles:['Biceps','Lats'],secondary:['Rear Deltoids','Core','Forearms'],steps:['Hang with underhand grip at shoulder-width.','Pull chest up towards the bar, leading with elbows.','Keep your body still — no swinging.','Lower slowly with full control to dead hang.'],tip:"💡 Supinated grip means more bicep — great for arm size as well as back width."},
+  'Lat Pulldown':{muscles:['Lats','Rear Deltoids','Biceps'],secondary:['Rhomboids','Teres Major'],steps:['Grip bar wider than shoulder-width, palms facing away.','Lean back slightly and pull bar to your upper chest.','Lead with elbows — drive them down and back.','Squeeze your lats at the bottom, hold briefly.','Return bar up slowly with control.'],tip:"💡 Imagine trying to put the bar in your back pockets."},
+  'Incline Dumbbell Press':{muscles:['Upper Chest','Anterior Deltoids','Triceps'],secondary:['Serratus Anterior'],steps:['Set bench to 30–45°. Dumbbells at shoulder level, palms forward.','Press both dumbbells up and slightly inward.','Lower with control, elbows at about 45° from body.','Feel the stretch at the bottom before pressing again.'],tip:"💡 30° hits upper chest better than 45° — most people go too steep."},
+  'Dumbbell Curl':{muscles:['Biceps','Brachialis'],secondary:['Forearms'],steps:['Stand holding dumbbells at sides, palms forward.','Curl both up towards shoulders, elbows fixed.','Squeeze hard at the top.','Lower slowly — take 3 seconds on the way down.'],tip:"💡 The slow lowering phase builds more muscle than the curl up."},
+  'Tricep Pushdown':{muscles:['Triceps'],secondary:['Forearms'],steps:['Set cable high, attach bar or rope.','Grip with elbows tucked at your sides.','Push down until arms are fully extended.','Squeeze triceps hard at the bottom.','Return slowly, letting elbows bend to ~90° at the top.'],tip:"💡 Keep elbows pinned to your sides throughout — don't let them flare."},
+  'Face Pull':{muscles:['Rear Deltoids','Rotator Cuff','Rhomboids'],secondary:['Traps','Biceps'],steps:['Set cable to face height, use rope attachment.','Pull rope towards your face, hands to either side of your head.','Keep elbows high and flared out throughout.','Squeeze rear delts and hold for a second.','Return slowly to the start.'],tip:"💡 Face pulls are one of the best shoulder health exercises — don't skip them."},
+  'Hip Thrust':{muscles:['Glutes','Hamstrings'],secondary:['Core','Quads'],steps:['Upper back against a bench, bar across your hips.','Plant feet flat, hip-width apart.','Drive hips up by squeezing glutes hard.','At the top, torso should be parallel to the floor.','Lower with control and repeat.'],tip:"💡 Tuck your chin and focus on a posterior pelvic tilt at the top for max glute activation."},
+  'Leg Press':{muscles:['Quads','Glutes','Hamstrings'],secondary:['Calves'],steps:['Sit in machine with feet hip-width on the platform.','Release safety and lower platform by bending knees.','Go as deep as comfortably possible without lower back rounding.','Push through your full foot to extend legs.','Do not lock out knees at the top.'],tip:"💡 High feet = more glutes/hamstrings, low feet = more quads."},
+  'Cable Fly':{muscles:['Chest','Anterior Deltoids'],secondary:['Biceps'],steps:['Set cables at chest height, stand in the centre with one foot forward.','Hold handles with a slight bend in your elbows.','Bring hands together in an arc in front of your chest.','Squeeze chest hard when hands meet.','Return slowly, feeling the chest stretch.'],tip:"💡 Keep the same elbow bend throughout."},
+  'Bulgarian Split Squat':{muscles:['Quads','Glutes'],secondary:['Hamstrings','Core','Calves'],steps:['Stand a metre in front of a bench, one foot on it behind you.','Lower back knee towards the floor.','Keep front shin as vertical as possible.','Drive through front heel to return to start.','Complete all reps on one leg before switching.'],tip:"💡 Most people stand too close — give yourself more room forward."},
+  'Seated Cable Row':{muscles:['Lats','Rhomboids','Rear Deltoids'],secondary:['Biceps','Lower Back'],steps:['Sit with feet on rests, knees slightly bent.','Pull handle to lower sternum, elbows close to body.','Squeeze shoulder blades together at the end.','Extend arms slowly back to start — feel the stretch.'],tip:"💡 Avoid rocking back — drive should come from your arms and back, not torso."},
+  'Dumbbell Shoulder Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Upper Traps','Core'],steps:['Sit with back support, dumbbells at shoulder height.','Press both dumbbells up and slightly inward.','Lower back to shoulder height with control.'],tip:"💡 A slight forward lean can help if you have shoulder mobility issues."},
+  'Calf Raise':{muscles:['Gastrocnemius','Soleus'],secondary:[],steps:['Stand with balls of feet on a raised surface.','Lower heels as far as comfortable to stretch calves.','Rise up on toes as high as possible.','Pause and squeeze at the top.','Lower slowly — 3 seconds down.'],tip:"💡 Calves respond best to both heavy weight and high reps."},
+  'Push-up':{muscles:['Chest','Anterior Deltoids','Triceps'],secondary:['Core','Serratus Anterior'],steps:['Hands just wider than shoulder-width, body in a straight line.','Lower chest to just above the floor, elbows at ~45°.','Press back up powerfully.','Keep core braced — don\'t let hips sag.'],tip:"💡 Elevate feet to increase difficulty; elevate hands on a bench to make easier."},
+  'Pike Push-up':{muscles:['Anterior Deltoids','Triceps'],secondary:['Upper Chest','Core'],steps:['Start in a downward dog position — hips high, straight legs.','Lower the top of your head towards the floor between your hands.','Press back up to the start position.'],tip:"💡 This is the bodyweight progression towards the handstand push-up."},
+  'Tricep Dips':{muscles:['Triceps','Anterior Deltoids'],secondary:['Chest','Core'],steps:['Grip parallel bars or bench edge, arms extended.','Lower body by bending elbows to ~90°.','Keep elbows pointing back, not flaring out.','Press back up to the start.'],tip:"💡 Lean forward for more chest. Stay upright for more triceps."},
+  'Plank':{muscles:['Core','Transverse Abdominis'],secondary:['Shoulders','Glutes','Back'],steps:['Forearms on floor, elbows under your shoulders.','Body in a straight line from head to heels.','Brace core, squeeze glutes.','Hold — breathe steadily.'],tip:"💡 A 20-second perfect plank beats a 60-second sagging one."},
+  'Inverted Row':{muscles:['Lats','Rhomboids','Rear Deltoids','Biceps'],secondary:['Core','Forearms'],steps:['Set bar at waist height. Hang below it, heels on the floor.','Keep body in a straight line.','Pull chest to the bar, leading with elbows.','Squeeze shoulder blades together at the top.','Lower with control.'],tip:"💡 Lower the bar to make it harder. Raise it to make it easier."},
+  'Lateral Raise':{muscles:['Lateral Deltoids'],secondary:['Anterior Deltoids','Traps'],steps:['Stand holding dumbbells at sides, slight bend in elbows.','Raise both arms out to the side to shoulder height.','Lead with your elbows, not your hands.','Lower slowly — 3 seconds down.'],tip:"💡 Lean very slightly forward to hit the mid-delt more directly."},
+  'Hammer Curl':{muscles:['Biceps','Brachialis'],secondary:['Forearms'],steps:['Hold dumbbells with a neutral (hammer) grip, palms facing in.','Curl both up towards shoulders, keeping palms neutral.','Squeeze at the top.','Lower slowly.'],tip:"💡 Hammer grip targets the brachialis — great for overall arm thickness."},
+  'Goblet Squat':{muscles:['Quads','Glutes'],secondary:['Core','Upper Back'],steps:['Hold a dumbbell or kettlebell at chest height with both hands.','Feet shoulder-width or slightly wider, toes slightly out.','Squat down keeping chest tall and elbows inside your knees.','Drive through heels to return to standing.'],tip:"💡 Great for learning squat mechanics — the weight counterbalances naturally."},
+  'Lunge':{muscles:['Quads','Glutes'],secondary:['Hamstrings','Core','Calves'],steps:['Stand tall, step one foot forward into a long stride.','Lower your back knee towards the floor.','Front shin stays vertical.','Push through front heel to return, then repeat other side.'],tip:"💡 Keep your torso upright — avoid leaning forward over your front knee."},
+  'Leg Curl':{muscles:['Hamstrings'],secondary:['Calves'],steps:['Lie face down on the machine, pad just above your heels.','Curl your heels towards your glutes.','Squeeze hamstrings at the top.','Lower slowly with control.'],tip:"💡 Point toes slightly for more bicep femoris activation."},
+  'Leg Extension':{muscles:['Quads'],secondary:[],steps:['Sit in the machine, pad on your shins just above the ankles.','Extend both legs until straight.','Hold briefly at the top, squeezing quads.','Lower slowly.'],tip:"💡 Pause at the top for 1–2 seconds to maximise quad activation."},
+  'Arnold Press':{muscles:['Anterior Deltoids','Lateral Deltoids','Triceps'],secondary:['Traps'],steps:['Start with dumbbells at chin height, palms facing you.','As you press up, rotate palms forward.','Fully extend arms at the top.','Reverse the rotation on the way down.'],tip:"💡 The rotation recruits more of the deltoid than a standard press."},
+  'Skull Crusher':{muscles:['Triceps'],secondary:[],steps:['Lie on a bench holding an EZ bar or dumbbells above your chest.','Keeping upper arms vertical, lower the weight towards your forehead.','Extend back up by straightening your elbows.','Keep elbows pointed at the ceiling throughout.'],tip:"💡 Go slow on the lowering phase — control is everything here."},
+  'Glute Bridge':{muscles:['Glutes','Hamstrings'],secondary:['Core'],steps:['Lie on your back, knees bent, feet flat on the floor.','Drive hips up by squeezing glutes hard.','Hold at the top for a second.','Lower back down and repeat.'],tip:"💡 Add a band above your knees or a weight on your hips to increase difficulty."},
+  'Kettlebell Swing':{muscles:['Glutes','Hamstrings','Lower Back'],secondary:['Core','Shoulders','Forearms'],steps:['Stand feet shoulder-width, kettlebell on the floor in front.','Hinge at the hips, grip the kettlebell.','Hike it back between your legs, then drive hips forward explosively.','Let the bell swing to chest height — power comes from the hips, not your arms.','Let it swing back and repeat.'],tip:"💡 This is a hip hinge, not a squat — snap your hips through."},
+  'Hanging Leg Raise':{muscles:['Core'],secondary:['Hip Flexors'],steps:['Hang from a pull-up bar with straight arms.','Keeping legs straight, raise them to hip height or above.','Lower slowly with control — don\'t swing.'],tip:"💡 Tuck your pelvis under at the top for full core engagement."},
+  'Russian Twist':{muscles:['Core'],secondary:['Obliques'],steps:['Sit with knees bent, feet slightly raised, torso leaning back at 45°.','Hold a weight with both hands at your chest.','Rotate your torso to one side, then the other.','Move in a controlled, deliberate motion.'],tip:"💡 The slower you go the more the obliques work."},
+  'Cable Curl':{muscles:['Biceps'],secondary:['Forearms'],steps:['Set cable to low position, attach straight bar or rope.','Stand facing the machine and curl the handle to your chin.','Squeeze at the top.','Lower slowly with tension throughout.'],tip:"💡 Cable keeps tension on the bicep at full extension — better than dumbbells for this."},
+  'Box Jump':{muscles:['Quads','Glutes','Calves'],secondary:['Hamstrings','Core'],steps:['Stand in front of a box, feet shoulder-width.','Dip into a quarter squat and swing arms back.','Explode upward, landing softly on the box with both feet.','Step down carefully and reset.'],tip:"💡 Land softly with knees bent — never lock out on landing."},
 };
+
 
 function showDemo(name){
   openM('mdemo');
@@ -585,7 +634,7 @@ function renderLog(){
   if(!S.session.length){el.innerHTML='<div class="es"><div class="ei">🏋️</div><div class="et">No exercises yet</div><div class="em">Tap "+ Add exercise" to start, or hit Start on today\'s plan.</div></div>';return;}
   el.innerHTML=S.session.map((ex,ei)=>{
     const esc=ex.name.replace(/'/g,"\\'");
-    return '<div class="lc"><div class="lch" onclick="togBody('+ei+')"><div style="flex:1;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span class="lcn">'+ex.name+'</span><button class="dbtn" onclick="event.stopPropagation();showDemo(\''+esc+'\')">▶ Demo</button></div><div class="lcm">'+ex.sets.length+' sets'+(ex.sets[0].weight?' · '+ex.sets[0].weight+'kg':'')+'</div></div><span style="color:var(--txt3);font-size:20px;margin-left:8px;">›</span></div><div class="lcb" id="lb'+ei+'"><div class="srow" style="margin-bottom:4px;"><div class="slbl" style="font-size:10px;">SET</div><div class="slbl" style="font-size:10px;">REPS</div><div class="slbl" style="font-size:10px;">KG</div><div></div></div>'+ex.sets.map((s,si)=>'<div class="srow"><div class="slbl">'+(si+1)+'</div><input class="si" type="number" value="'+s.reps+'" min="1" onchange="updS('+ei+','+si+',\'reps\',this.value)"><input class="si" type="number" value="'+s.weight+'" min="0" step="0.5" onchange="updS('+ei+','+si+',\'weight\',this.value)"><button class="sdel" onclick="delS('+ei+','+si+')">×</button></div>').join('')+'<div id="it'+ei+'" style="margin-top:4px;font-size:11px;color:var(--acc2);"></div><div class="la"><button class="btn btn-g btn-s" onclick="addS('+ei+')" style="flex:1;">+ Set</button><button class="btn btn-d btn-s" onclick="remEx('+ei+')" style="flex:1;">Remove</button></div></div></div>';
+    return '<div class="lc"><div class="lch" onclick="togBody('+ei+')"><div style="flex:1;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span class="lcn">'+ex.name+'</span><button class="dbtn" onclick="event.stopPropagation();showDemo(\''+esc+'\')">▶ Demo</button>+'<button class="dbtn" style="color:var(--acc)" onclick="event.stopPropagation();openReplace('+ei+')">⇄ Replace</button></div><div class="lcm">'+ex.sets.length+' sets'+(ex.sets[0].weight?' · '+ex.sets[0].weight+'kg':'')+'</div></div><span style="color:var(--txt3);font-size:20px;margin-left:8px;">›</span></div><div class="lcb" id="lb'+ei+'"><div class="srow" style="margin-bottom:4px;"><div class="slbl" style="font-size:10px;">SET</div><div class="slbl" style="font-size:10px;">REPS</div><div class="slbl" style="font-size:10px;">KG</div><div></div></div>'+ex.sets.map((s,si)=>'<div class="srow"><div class="slbl">'+(si+1)+'</div><input class="si" type="number" value="'+s.reps+'" min="1" onchange="updS('+ei+','+si+',\'reps\',this.value)"><input class="si" type="number" value="'+s.weight+'" min="0" step="0.5" onchange="updS('+ei+','+si+',\'weight\',this.value)"><button class="sdel" onclick="delS('+ei+','+si+')">×</button></div>').join('')+'<div id="it'+ei+'" style="margin-top:4px;font-size:11px;color:var(--acc2);"></div><div class="la"><button class="btn btn-g btn-s" onclick="addS('+ei+')" style="flex:1;">+ Set</button><button class="btn btn-d btn-s" onclick="remEx('+ei+')" style="flex:1;">Remove</button></div></div></div>';
   }).join('');
   S.session.forEach((ex,i)=>{const t=getProgTip(ex.name);const el=document.getElementById('it'+i);if(el&&t)el.textContent=t;});
 }
@@ -688,6 +737,77 @@ function renderProfile(){
   document.getElementById('pfij').textContent=u.injuries||'None';
 }
 
+
+// ══════════════════════════════
+//  REPLACE EXERCISE
+// ══════════════════════════════
+let replaceIdx = null;
+
+function openReplace(ei) {
+  replaceIdx = ei;
+  const name = S.session[ei].name;
+  document.getElementById('replace-title').textContent = 'Replace: ' + name;
+  document.getElementById('replace-sub').textContent = 'Pick from the same muscle group or search all 150+ exercises';
+  document.getElementById('replace-search').value = '';
+  renderReplaceList(name, '');
+  openM('mreplace');
+}
+
+function filterReplace() {
+  const name = S.session[replaceIdx] ? S.session[replaceIdx].name : '';
+  renderReplaceList(name, document.getElementById('replace-search').value.trim());
+}
+
+function renderReplaceList(currentName, search) {
+  const el = document.getElementById('replace-groups');
+  const lower = search.toLowerCase();
+
+  if (search.length > 0) {
+    // Search across everything
+    const matches = ALL_EXERCISES.filter(e =>
+      e.toLowerCase().includes(lower) && e.toLowerCase() !== currentName.toLowerCase()
+    );
+    if (!matches.length) { el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--txt3);font-size:13px;">No exercises found</div>'; return; }
+    el.innerHTML = matches.map(e => rexBtn(e, currentName)).join('');
+    return;
+  }
+
+  // No search — show same-group first, then all other groups
+  const currentGroup = findGroup(currentName);
+  let out = '';
+
+  if (currentGroup) {
+    const alts = EXDB[currentGroup].exercises.filter(e => e.toLowerCase() !== currentName.toLowerCase());
+    out += '<div class="rgroup-label">📌 ' + EXDB[currentGroup].label + ' — same muscle group</div>';
+    out += alts.map(e => rexBtn(e, currentName)).join('');
+  }
+
+  for (const [key, group] of Object.entries(EXDB)) {
+    if (key === currentGroup) continue;
+    out += '<div class="rgroup-label">' + group.label + '</div>';
+    out += group.exercises.map(e => rexBtn(e, currentName)).join('');
+  }
+  el.innerHTML = out;
+}
+
+function rexBtn(name, current) {
+  const isSame = findGroup(name) === findGroup(current) && findGroup(current) !== null;
+  const esc = name.replace(/'/g, "\'");
+  return '<button class="rex-btn" onclick="doReplace('' + esc + '')">' +
+    '<span>' + name + (isSame ? '<span class="same">✓ same group</span>' : '') + '</span>' +
+    '<span style="color:var(--txt3);font-size:12px;">Swap →</span>' +
+    '</button>';
+}
+
+function doReplace(newName) {
+  if (replaceIdx === null) return;
+  S.session[replaceIdx].name = newName;
+  closeM('mreplace');
+  renderLog();
+  // Auto-open the card so they can see it
+  setTimeout(() => togBody(replaceIdx), 80);
+}
+
 // ══════════════════════════════
 //  BOOT
 // ══════════════════════════════
@@ -695,5 +815,17 @@ function initApp(){renderHome();renderHist();renderPlans();renderProfile();rende
 load();
 if(S.done){document.getElementById('obs').style.display='none';initApp();}
 </script>
+
+<!-- Replace Exercise Modal -->
+<div class="mo" id="mreplace" onclick="closeM('mreplace')">
+  <div class="ms" onclick="event.stopPropagation()">
+    <div class="mh"></div>
+    <div class="mt" id="replace-title">Replace exercise</div>
+    <div style="font-size:13px;color:var(--txt2);margin-bottom:14px;" id="replace-sub">Same muscle group</div>
+    <input id="replace-search" placeholder="Search all exercises…" oninput="filterReplace()" style="margin-bottom:12px;">
+    <div id="replace-groups"></div>
+  </div>
+</div>
+
 </body>
 </html>
