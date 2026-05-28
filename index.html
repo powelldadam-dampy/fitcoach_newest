@@ -569,10 +569,25 @@ const CS={g1:[],eq1:[]};
 function tc(el,g){el.classList.toggle('sel');CS[g]=CS[g]||[];const v=el.dataset.v;if(el.classList.contains('sel'))CS[g].push(v);else CS[g]=CS[g].filter(x=>x!==v);}
 function obb(){if(obStep>0){obStep--;showOb();}}
 function obn(){
-  if(obStep===0){const n=document.getElementById('u1n').value.trim();if(!n){alert('Please enter your name');return;}S.user.name=n;document.getElementById('ob1tag').textContent=n.toUpperCase();}
-  else if(obStep===1){S.user.goals=CS.g1;S.user.level=document.getElementById('l1').value;S.user.injuries=document.getElementById('inj1').value;document.getElementById('ob2tag').textContent=S.user.name.toUpperCase();}
-  else if(obStep===2){S.user.equipment=CS.eq1;S.user.days=document.getElementById('d1').value;S.user.duration=document.getElementById('dur1').value;autoplan();buildSumm();}
-  obStep++;if(obStep>=4)return;showOb();
+  if(obStep===0){
+    const n=document.getElementById('u1n').value.trim();
+    if(!n){alert('Please enter your name');return;}
+    S.user.name=n;
+    document.getElementById('ob1tag').textContent=n.toUpperCase();
+  } else if(obStep===1){
+    S.user.goals=CS.g1;
+    S.user.level=document.getElementById('l1').value;
+    S.user.injuries=document.getElementById('inj1').value;
+    document.getElementById('ob2tag').textContent=S.user.name.toUpperCase();
+  } else if(obStep===2){
+    S.user.equipment=CS.eq1;
+    S.user.days=document.getElementById('d1').value;
+    S.user.duration=document.getElementById('dur1').value;
+    autoplan();
+    buildSumm();
+  }
+  obStep++;
+  if(obStep<=3) showOb();
 }
 function showOb(){document.querySelectorAll('.obs').forEach((s,i)=>s.classList.toggle('on',i===obStep));document.querySelectorAll('.pip').forEach((p,i)=>p.classList.toggle('on',i<=obStep));}
 function autoplan(){
