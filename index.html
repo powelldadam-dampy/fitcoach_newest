@@ -646,12 +646,53 @@ function addEx(){
 }
 function renderLog(){
   const el=document.getElementById('loglist');
-  if(!S.session.length){el.innerHTML='<div class="es"><div class="ei">🏋️</div><div class="et">No exercises yet</div><div class="em">Tap "+ Add exercise" to start, or hit Start on today\'s plan.</div></div>';return;}
-  el.innerHTML=S.session.map((ex,ei)=>{
-    const esc=ex.name.replace(/'/g,"\\'");
-    return '<div class="lc"><div class="lch" onclick="togBody('+ei+')"><div style="flex:1;"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;"><span class="lcn">'+ex.name+'</span><button class="dbtn" onclick="event.stopPropagation();showDemo(\''+esc+'\')">▶ Demo</button>+'<button class="dbtn" style="color:var(--acc)" onclick="event.stopPropagation();openReplace('+ei+')">⇄ Replace</button></div><div class="lcm">'+ex.sets.length+' sets'+(ex.sets[0].weight?' · '+ex.sets[0].weight+'kg':'')+'</div></div><span style="color:var(--txt3);font-size:20px;margin-left:8px;">›</span></div><div class="lcb" id="lb'+ei+'"><div class="srow" style="margin-bottom:4px;"><div class="slbl" style="font-size:10px;">SET</div><div class="slbl" style="font-size:10px;">REPS</div><div class="slbl" style="font-size:10px;">KG</div><div></div></div>'+ex.sets.map((s,si)=>'<div class="srow"><div class="slbl">'+(si+1)+'</div><input class="si" type="number" value="'+s.reps+'" min="1" onchange="updS('+ei+','+si+',\'reps\',this.value)"><input class="si" type="number" value="'+s.weight+'" min="0" step="0.5" onchange="updS('+ei+','+si+',\'weight\',this.value)"><button class="sdel" onclick="delS('+ei+','+si+')">×</button></div>').join('')+'<div id="it'+ei+'" style="margin-top:4px;font-size:11px;color:var(--acc2);"></div><div class="la"><button class="btn btn-g btn-s" onclick="addS('+ei+')" style="flex:1;">+ Set</button><button class="btn btn-d btn-s" onclick="remEx('+ei+')" style="flex:1;">Remove</button></div></div></div>';
+  if(!S.session.length){
+    el.innerHTML='<div class="es"><div class="ei">🏋️</div><div class="et">No exercises yet</div><div class="em">Tap "+ Add exercise" to start, or hit Start on today\'s plan.</div></div>';
+    return;
+  }
+  el.innerHTML=S.session.map(function(ex,ei){
+    var esc=ex.name.replace(/'/g,"\\'");
+    var sets_html=ex.sets.map(function(s,si){
+      return '<div class="srow">'
+        +'<div class="slbl">'+(si+1)+'</div>'
+        +'<input class="si" type="number" value="'+s.reps+'" min="1" onchange="updS('+ei+','+si+',\'reps\',this.value)">'
+        +'<input class="si" type="number" value="'+s.weight+'" min="0" step="0.5" onchange="updS('+ei+','+si+',\'weight\',this.value)">'
+        +'<button class="sdel" onclick="delS('+ei+','+si+')">×</button>'
+        +'</div>';
+    }).join('');
+    return '<div class="lc">'
+      +'<div class="lch" onclick="togBody('+ei+')">'
+        +'<div style="flex:1;">'
+          +'<div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">'
+            +'<span class="lcn">'+ex.name+'</span>'
+            +'<button class="dbtn" onclick="event.stopPropagation();showDemo(\''+esc+'\')">&#9654; Demo</button>'
+            +'<button class="dbtn" style="color:var(--acc)" onclick="event.stopPropagation();openReplace('+ei+')">&#8644; Swap</button>'
+          +'</div>'
+          +'<div class="lcm">'+ex.sets.length+' sets'+(ex.sets[0].weight?' · '+ex.sets[0].weight+'kg':'')+'</div>'
+        +'</div>'
+        +'<span style="color:var(--txt3);font-size:20px;margin-left:8px;">&#8250;</span>'
+      +'</div>'
+      +'<div class="lcb" id="lb'+ei+'">'
+        +'<div class="srow" style="margin-bottom:4px;">'
+          +'<div class="slbl" style="font-size:10px;">SET</div>'
+          +'<div class="slbl" style="font-size:10px;">REPS</div>'
+          +'<div class="slbl" style="font-size:10px;">KG</div>'
+          +'<div></div>'
+        +'</div>'
+        +sets_html
+        +'<div id="it'+ei+'" style="margin-top:4px;font-size:11px;color:var(--acc2);"></div>'
+        +'<div class="la">'
+          +'<button class="btn btn-g btn-s" onclick="addS('+ei+')" style="flex:1;">+ Set</button>'
+          +'<button class="btn btn-d btn-s" onclick="remEx('+ei+')" style="flex:1;">Remove</button>'
+        +'</div>'
+      +'</div>'
+    +'</div>';
   }).join('');
-  S.session.forEach((ex,i)=>{const t=getProgTip(ex.name);const el=document.getElementById('it'+i);if(el&&t)el.textContent=t;});
+  S.session.forEach(function(ex,i){
+    var t=getProgTip(ex.name);
+    var el2=document.getElementById('it'+i);
+    if(el2&&t)el2.textContent=t;
+  });
 }
 function togBody(i){document.getElementById('lb'+i).classList.toggle('on');}
 function updS(ei,si,f,v){S.session[ei].sets[si][f]=parseFloat(v)||0;}
@@ -806,12 +847,12 @@ function renderReplaceList(currentName, search) {
 }
 
 function rexBtn(name, current) {
-  const isSame = findGroup(name) === findGroup(current) && findGroup(current) !== null;
-  const esc = name.replace(/'/g, "\'");
-  return '<button class="rex-btn" onclick="doReplace('' + esc + '')">' +
-    '<span>' + name + (isSame ? '<span class="same">✓ same group</span>' : '') + '</span>' +
-    '<span style="color:var(--txt3);font-size:12px;">Swap →</span>' +
-    '</button>';
+  var isSame = findGroup(name) === findGroup(current) && findGroup(current) !== null;
+  var esc = name.replace(/'/g, "\'");
+  return '<button class="rex-btn" onclick="doReplace(\'' + esc + '\')">'
+    + '<span>' + name + (isSame ? '<span class="same">&#10003; same group</span>' : '') + '</span>'
+    + '<span style="color:var(--txt3);font-size:12px;">Swap &#8594;</span>'
+    + '</button>';
 }
 
 function doReplace(newName) {
